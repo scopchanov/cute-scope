@@ -22,4 +22,4 @@ The code in this repository is not on an official release by the Qt company or a
  * Digging in the Qt's source code
  * Working on several Qt based projects of mine for desktop applications
  
-there is absolutely no guarantee, that the code shared in this repository represents the best, or the only way, to solve a particular programming problem. Please 
+there is absolutely no guarantee, that the code shared in this repository represents the best, or the only way, to solve a particular programming problem. Please do not use the code blindly, as it is meant only for demonstration purposes, but analyze how it works and when necessary, adapt it to make it fit the requirements and standrads of your particullar application.
