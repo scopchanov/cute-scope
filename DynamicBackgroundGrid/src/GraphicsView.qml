@@ -63,10 +63,7 @@ Item {
 				horizontalAlignment: Image.AlignLeft
 				verticalAlignment: Image.AlignTop
 				fillMode: Image.Tile
-				source: "image://icons/" + gridPattern
-						+ "_" + gridColor.hslHue
-						+ "," + gridColor.hslSaturation
-						+ "," + gridColor.hslLightness
+				source: "image://icons/" + gridPattern + "/" + gridColor
 			}
 
 			Label {

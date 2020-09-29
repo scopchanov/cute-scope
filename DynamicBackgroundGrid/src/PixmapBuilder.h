@@ -41,7 +41,6 @@ public:
 						  const QSize &requestedSize) override;
 
 private:
-	QColor fromHslStringF(const QString &str);
 	void drawDottedGrid(QPainter *painter, const QColor &color);
 	void drawCrossedGrid(QPainter *painter, const QColor &color, int width);
 	void drawBoxedGrid(QPainter *painter, const QColor &color, int width);

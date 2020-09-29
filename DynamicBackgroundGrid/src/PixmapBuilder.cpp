@@ -38,8 +38,8 @@ QPixmap PixmapBuilder::requestPixmap(const QString &id, QSize *size,
 	if (size)
 		*size = QSize(width, height);
 
-	const QStringList &img(id.split('_'));
-	const QColor &color(fromHslStringF(img.last()));
+	const QStringList &source(id.split('/'));
+	const QColor &color(source.last());
 	QPixmap pixmap(requestedSize.width() > 0 ? requestedSize.width() : width,
 				   requestedSize.height() > 0 ? requestedSize.height() : height);
 	QPainter painter;
@@ -55,7 +55,7 @@ QPixmap PixmapBuilder::requestPixmap(const QString &id, QSize *size,
 	hash.insert("boxed", PT_Boxed);
 	hash.insert("fancy", PT_Fancy);
 
-	switch (hash.value(img.first().toLower())) {
+	switch (hash.value(source.first().toLower())) {
 	case PT_Dotted:
 		drawDottedGrid(&painter, color);
 		break;
@@ -71,15 +71,6 @@ QPixmap PixmapBuilder::requestPixmap(const QString &id, QSize *size,
 	}
 
 	return pixmap;
-}
-
-QColor PixmapBuilder::fromHslStringF(const QString &str)
-{
-	const QStringList &components(str.split(','));
-
-	return QColor::fromHslF(components.at(0).toDouble(),
-							components.at(1).toDouble(),
-							components.at(2).toDouble());
 }
 
 void PixmapBuilder::drawDottedGrid(QPainter *painter, const QColor &color)
