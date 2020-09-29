@@ -5,14 +5,14 @@
 **CuteScope** is a collection of example desktop applications under Windows, aiming to offer an additional help to the developers, looking for how to implement a particullar feature with Qt.
 
 ## Why CuteScope?
-There is a plenty of information on the Internet of what the Qt library is and how to use it. The Qt documentation iself offers a rich variety of examples in C++ and QML. Even then it is sometimes not so obvious how to implement a particular feature. 
+There is a plenty of information on the Internet of what the Qt library is and how to use it. The Qt documentation iself offers a rich variety of examples in C++ and QML. Even then, it is sometimes not so obvious how to implement a particular feature. **CuteScope** is meant to serve as an additional source of helpful ideas in this regard.
 
 ## How to use CuteScope
 To use the examples you need the [Qt Library](https://www.qt.io/) and a C++ compiler for your platform.
 
 1. Download the code
 2. Open the `pro`-file of a particular example in Qt Creator
-3. Set the kit
+3. Set a build kit
 4. Build and run the project from Qt Creator
 
 My personal setup is a Windows 10 PC with a Microsoft Visual Studio 2019.
