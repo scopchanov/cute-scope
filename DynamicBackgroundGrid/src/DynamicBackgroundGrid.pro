@@ -20,7 +20,7 @@
 
 QT  += gui widgets quick
 
-CONFIG += C11
+CONFIG += c++11
 CONFIG += qtquickcompiler
 
 RESOURCES += \
@@ -32,3 +32,8 @@ HEADERS += \
 SOURCES += \
     main.cpp \
     PixmapBuilder.cpp
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
