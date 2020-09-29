@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>ColorPanel.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>LabeledSlider.qml</file>
+        <file>ThemeModel.js</file>
+        <file>ColorButton.qml</file>
+        <file>AppToolBar.qml</file>
+        <file>AppToolButton.qml</file>
+        <file>GraphicsView.qml</file>
+    </qresource>
+    <qresource prefix="/bin">
+        <file>fonts/roboto/Roboto-Bold.ttf</file>
+        <file>fonts/roboto/Roboto-Medium.ttf</file>
+        <file>fonts/roboto/Roboto-Regular.ttf</file>
+    </qresource>
+    <qresource prefix="/pix">
+        <file>images/icons/16/grid.png</file>
+        <file>images/icons/16/background.png</file>
+    </qresource>
+</RCC>
