@@ -25,14 +25,20 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 
 ApplicationWindow {
+	id: mainWindow
+
 	width: 1040
 	height: 840
+	minimumWidth: graphicsView.implicitWidth
+	minimumHeight: graphicsView.implicitHeight
 	visible: true
 	title: qsTr("Dynamic Background Grid")
 
 	FontLoader { id: regular; source: "bin/fonts/roboto/Roboto-Regular.ttf" }
 	FontLoader { id: medium; source: "bin/fonts/roboto/Roboto-Medium.ttf" }
 	FontLoader { id: bold; source: "bin/fonts/roboto/Roboto-Bold.ttf" }
+
+	property real scaleMultiplier: 1
 
 	header: AppToolBar {
 		id: toolBar
@@ -43,11 +49,16 @@ ApplicationWindow {
 		anchors.margins: 20
 
 		GraphicsView {
+			id: graphicsView
+
 			Layout.alignment: Qt.AlignCenter
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			Layout.maximumWidth: scene.implicitWidth
-			Layout.maximumHeight: scene.implicitHeight
+			Layout.maximumWidth: scene.width*zoom
+			Layout.maximumHeight: scene.height*zoom
+			implicitWidth: 400
+			implicitHeight: 300
+			zoom: slider.value * scaleMultiplier
 
 			gridPattern: toolBar.gridPattern
 			gridSize: Qt.size(toolBar.gridSize, toolBar.gridSize)
@@ -55,6 +66,21 @@ ApplicationWindow {
 			backgroundColor: toolBar.backgroundColor
 			gridVisible: toolBar.hasGrid
 			backgroundVisible: toolBar.hasBackground
+		}
+	}
+
+	footer: ToolBar {
+		palette.button: mainWindow.palette.window
+		RowLayout {
+			anchors.fill: parent
+
+			ZoomSlider {
+				id: slider
+
+				Layout.fillHeight: true
+				Layout.alignment: Qt.AlignHCenter
+				implicitWidth: 300
+			}
 		}
 	}
 }

@@ -26,6 +26,7 @@ import QtQuick.Controls 2.15
 Item {
 	id: root
 
+	property real zoom: 1.0
 	property string gridPattern
 	property color gridColor
 	property alias gridSize: grid.sourceSize
@@ -33,6 +34,14 @@ Item {
 	property alias gridVisible: grid.visible
 	property alias backgroundVisible: background.visible
 	property alias scene: scene
+
+	onZoomChanged: {
+		var zoomPoint = Qt.point(0.5*flickable.width + flickable.contentX,
+								 0.5*flickable.height + flickable.contentY);
+
+		flickable.resizeContent(scene.width*zoom, scene.height*zoom, zoomPoint);
+		flickable.returnToBounds();
+	}
 
 	Flickable {
 		id: flickable
@@ -47,8 +56,11 @@ Item {
 		Item {
 			id: scene
 
-			implicitWidth: 1201
-			implicitHeight: 801
+			anchors.centerIn: parent
+			implicitWidth: 1200
+			implicitHeight: 800
+			transformOrigin: Item.Center
+			scale: zoom
 
 			Rectangle {
 				id: background

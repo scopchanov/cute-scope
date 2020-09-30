@@ -9,6 +9,8 @@
         <file>AppToolBar.qml</file>
         <file>AppToolButton.qml</file>
         <file>GraphicsView.qml</file>
+        <file>ZoomSlider.qml</file>
+        <file>ScaleDot.qml</file>
     </qresource>
     <qresource prefix="/bin">
         <file>fonts/roboto/Roboto-Bold.ttf</file>
