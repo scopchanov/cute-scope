@@ -36,6 +36,9 @@ AbstractButton {
 
 	onClicked: popup.open()
 
+	Behavior on opacity { NumberAnimation { duration: 75 } }
+	Behavior on scale { NumberAnimation { duration: 75 } }
+
 	RowLayout {
 		anchors.fill: parent
 		spacing: 0

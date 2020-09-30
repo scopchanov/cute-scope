@@ -36,6 +36,9 @@ ToolButton {
 	opacity: down ? 0.9 : 1
 	scale: down ? 0.92 : 1
 
+	Behavior on opacity { NumberAnimation { duration: 75 } }
+	Behavior on scale { NumberAnimation { duration: 75 } }
+
 	contentItem: Image {
 		source: icon.source
 		sourceSize: Qt.size(16, 16)
