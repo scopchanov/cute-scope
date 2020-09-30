@@ -7,7 +7,7 @@ Item {
 	property alias value: slider.value
 	property real snapThreshold: 0.03
 
-	Slider {
+	AppSlider {
 		id: slider
 
 		property real __middle: 0.5*(from + to)
@@ -17,17 +17,11 @@ Item {
 		property real __midRightDeadband: __middle + snapThreshold
 
 		width: parent.width
-		from: 0.5
-		to: 1.5
-		value: 1.0
+		from: 0.5; to: 1.5; value: 1.0
 
-		background: Rectangle {
+		Item {
 			anchors.centerIn: parent
-			width: slider.availableWidth - slider.leftPadding
-				   - slider.rightPadding
-			height: 2
-			radius: 1
-			color: "#BDBDBD"
+			width: parent.background.width
 
 			ScaleDot {
 				anchors.left: parent.left
@@ -46,33 +40,6 @@ Item {
 				anchors.rightMargin: -2
 				anchors.verticalCenter: parent.verticalCenter
 				text: "2:1"
-			}
-		}
-
-		handle: Rectangle {
-			x: slider.leftPadding + slider.visualPosition*(slider.availableWidth
-														   - width)
-			anchors.verticalCenter: slider.verticalCenter
-			implicitWidth: 16
-			implicitHeight: 16
-			radius: 8
-			border.color: "#9E9E9E"
-			color: "white"
-			scale: slider.pressed ? 0.95 : 1
-			opacity: slider.pressed ? 0.75 : 1
-
-			Behavior on opacity { NumberAnimation { duration: 75 } }
-			Behavior on scale { NumberAnimation { duration: 75 } }
-
-			Rectangle {
-				anchors.centerIn: parent
-				implicitWidth: 6
-				implicitHeight: 6
-				radius: 3
-				color: "#1976D2"
-				scale: slider.pressed ? 0.75 : 1
-
-				Behavior on scale { NumberAnimation { duration: 75 } }
 			}
 		}
 

@@ -38,7 +38,7 @@ Item {
 			text: root.text + ": " + Math.round(255*slider.value)
 		}
 
-		Slider {
+		AppSlider {
 			id: slider
 
 			Layout.fillWidth: true

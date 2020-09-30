@@ -11,6 +11,7 @@
         <file>GraphicsView.qml</file>
         <file>ZoomSlider.qml</file>
         <file>ScaleDot.qml</file>
+        <file>AppSlider.qml</file>
     </qresource>
     <qresource prefix="/bin">
         <file>fonts/roboto/Roboto-Bold.ttf</file>

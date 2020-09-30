@@ -32,7 +32,7 @@ Frame {
 								  sliderL.value, 1.0)
 
 	implicitWidth: 300
-	implicitHeight: 200
+	implicitHeight: 180
 
 	clip: true
 	background: Rectangle {
