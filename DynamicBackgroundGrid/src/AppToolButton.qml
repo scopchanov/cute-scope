@@ -27,12 +27,13 @@ import QtQuick.Layouts 1.12
 ToolButton {
 	id: root
 
+	property alias toolTipText: toolTip.text
+
 	implicitWidth: 40
 	implicitHeight: 40
 	checkable: true
 	checked: true
 	clip: true
-	ToolTip.visible: hovered
 	opacity: down ? 0.9 : 1
 	scale: down ? 0.92 : 1
 
@@ -58,5 +59,11 @@ ToolButton {
 			visible: checked
 			radius: 1
 		}
+	}
+
+	AppToolTip {
+		id: toolTip
+
+		visible: root.hovered
 	}
 }

@@ -27,6 +27,7 @@ import QtQuick.Layouts 1.12
 AbstractButton {
 	id: root
 
+	property alias toolTipText: toolTip.text
 	property alias initialColor: panel.initialColor
 	property alias color: panel.color
 
@@ -60,6 +61,12 @@ AbstractButton {
 			border.color: palette.dark
 			color: enabled ? panel.color : palette.mid
 		}
+	}
+
+	AppToolTip {
+		id: toolTip
+
+		visible: root.hovered && !popup.opened
 	}
 
 	Popup {

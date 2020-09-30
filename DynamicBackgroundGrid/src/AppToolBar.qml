@@ -48,14 +48,14 @@ ToolBar {
 			id: btnGrid
 
 			icon.source: "pix/images/icons/16/grid.png"
-			ToolTip.text: qsTr("Toggle the grid")
+			toolTipText: qsTr("Toggle the grid on/off")
 		}
 
 		AppToolButton {
 			id: btnBackground
 
 			icon.source: "pix/images/icons/16/background.png"
-			ToolTip.text: qsTr("Toggle the background")
+			toolTipText: qsTr("Toggle the background on/off")
 		}
 
 		ToolSeparator {}
@@ -114,9 +114,10 @@ ToolBar {
 			Layout.fillHeight: true
 			Layout.leftMargin: 9
 			Layout.rightMargin: 9
-			enabled: __hasCustomTheme
-			text: qsTr("Grid")
 			initialColor: Qt.hsla(0.7059, 0.5804, 0.7569, 1.0)
+			enabled: __hasCustomTheme
+			toolTipText: qsTr("Set the grid color")
+			text: qsTr("Grid")
 		}
 
 		ColorButton {
@@ -125,9 +126,10 @@ ToolBar {
 			Layout.fillHeight: true
 			Layout.leftMargin: 9
 			Layout.rightMargin: 9
-			enabled: __hasCustomTheme
-			text: qsTr("Background")
 			initialColor: Qt.hsla(0.7373, 0.5882, 0.8039, 1.0)
+			enabled: __hasCustomTheme
+			toolTipText: qsTr("Set the background color")
+			text: qsTr("Background")
 		}
 
 		Item {
@@ -135,12 +137,28 @@ ToolBar {
 		}
 
 		Label {
+			verticalAlignment: Qt.AlignVCenter
+			Layout.fillHeight: true
 			Layout.rightMargin: 11
 			linkColor: palette.highlight
 			font.pointSize: 10
 			text: "<a href='https://www.scopchanov.de'>scopchanov.de</a>"
 
 			onLinkActivated: Qt.openUrlExternally(link)
+
+			AppToolTip {
+				visible: mouseArea.containsMouse
+				text: qsTr("Visit the developer's page")
+			}
+
+			MouseArea {
+				id: mouseArea
+
+				anchors.fill: parent
+				hoverEnabled: true
+				cursorShape: Qt.PointingHandCursor
+				acceptedButtons: Qt.NoButton
+			}
 		}
 	}
 }
