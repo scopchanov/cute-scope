@@ -51,6 +51,7 @@ Item {
 		contentHeight: scene.height
 		boundsMovement: Flickable.StopAtBounds
 		boundsBehavior: Flickable.StopAtBounds
+		interactive: false
 		clip: true
 
 		Item {
@@ -89,6 +90,13 @@ Item {
 					opacity: 0.75
 					radius: 4
 				}
+			}
+
+			StateItem {
+				x: 100; y: 100
+				name: "Example Item"
+				index: 0
+				gridSize: root.gridSize
 			}
 		}
 

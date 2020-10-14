@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>FilledTextField.qml</file>
+        <file>FieldLabel.qml</file>
+        <file>FieldActivationIndicator.qml</file>
+        <file>FieldIcon.qml</file>
+        <file>ContainedButton.qml</file>
+        <file>Ripple.qml</file>
+        <file>TextButton.qml</file>
+        <file>ButtonLabel.qml</file>
+    </qresource>
+    <qresource prefix="/bin">
+        <file>fonts/roboto/Roboto-Bold.ttf</file>
+        <file>fonts/roboto/Roboto-Medium.ttf</file>
+        <file>fonts/roboto/Roboto-Regular.ttf</file>
+    </qresource>
+    <qresource prefix="/pix">
+        <file>images/icons/24/clear-outline.png</file>
+        <file>images/icons/24/clear-full.png</file>
+    </qresource>
+</RCC>

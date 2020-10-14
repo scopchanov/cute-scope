@@ -13,6 +13,7 @@
         <file>ScaleDot.qml</file>
         <file>AppSlider.qml</file>
         <file>AppToolTip.qml</file>
+        <file>StateItem.qml</file>
     </qresource>
     <qresource prefix="/bin">
         <file>fonts/roboto/Roboto-Bold.ttf</file>
