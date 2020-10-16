@@ -1,11 +1,13 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import Scope.ReactiveForms 1.0
+import "cdk"
 
 /*
  * Filled Text Field
  */
 
-Item {
+FormElement {
 	id: root
 
 	readonly property bool isEmpty: fieldInput.text === ""
@@ -15,10 +17,13 @@ Item {
 	property bool isRequired: false
 	property bool isTouched: false
 	property alias text: fieldInput.text
-
+	
 	implicitWidth: 280
 	implicitHeight: 72
 	opacity: enabled ? 1 : 0.25
+
+	valid: !isRequired || !isEmpty
+	pristine: true
 
 	Behavior on opacity {
 		NumberAnimation {
@@ -55,29 +60,15 @@ Item {
 			color: palette.highlight
 		}
 
-		TextField {
+		FieldInput {
 			id: fieldInput
 
 			anchors.fill: parent
 			topPadding: 20
-			bottomPadding: 6
+			bottomPadding: 8
 			leftPadding: 16
 			rightPadding: 48
-			palette.text: "black"
-			selectByMouse: true
-
-			background: Rectangle { color: "transparent" }
-
-			onActiveFocusChanged: {
-				if (!activeFocus) {
-					if (focusReason !== Qt.OtherFocusReason) {
-						isTouched = true;
-					}
-				} else if (focusReason === Qt.TabFocusReason
-						|| focusReason === Qt.BacktabFocusReason) {
-					fieldInput.selectAll();
-				}
-			}
+			verticalAlignment: TextInput.AlignVCenter
 		}
 
 		// Label

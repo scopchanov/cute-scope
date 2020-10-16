@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "Form.h"
+#include "FormElement.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,7 +12,8 @@ int main(int argc, char *argv[])
 	QQmlApplicationEngine engine;
 	const QUrl url(QStringLiteral("qrc:/main.qml"));
 
-	qmlRegisterType<Form>("Scope.ReaciveForms", 1, 0, "Form");
+	qmlRegisterType<Form>("Scope.ReactiveForms", 1, 0, "Form");
+	qmlRegisterType<FormElement>("Scope.ReactiveForms", 1, 0, "FormElement");
 
 	QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
 					 &app, [url](QObject *obj, const QUrl &objUrl) {

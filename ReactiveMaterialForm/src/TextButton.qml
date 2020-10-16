@@ -60,10 +60,10 @@ Item {
 			PropertyChanges { target: label; color: "#9E9E9E" }
 		},
 		State {
-			name: "disabled"
+			name: "focused"
 			when: activeFocus
 
-			PropertyChanges { target: base; opacity: 0.5; color: "#F5F5F5" }
+			PropertyChanges { target: base; color: "#F5F5F5" }
 		}
 	]
 

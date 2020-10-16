@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/bin">
+        <file>fonts/roboto/Roboto-Bold.ttf</file>
+        <file>fonts/roboto/Roboto-Medium.ttf</file>
+        <file>fonts/roboto/Roboto-Regular.ttf</file>
+    </qresource>
+    <qresource prefix="/pix">
+        <file>images/icons/24/clear-full.png</file>
+        <file>images/icons/24/clear-outline.png</file>
+    </qresource>
+</RCC>

@@ -2,6 +2,7 @@
 #define FORM_H
 
 #include <QQuickItem>
+#include <QJsonObject>
 
 //	valid: This property returns true if the element’s contents are valid and false otherwise.
 //	invalid: This property returns true if the element’s contents are invalid and false otherwise.
@@ -17,19 +18,24 @@
 // @property {boolean} $pristine True if user has not interacted with the control yet.
 // @property {boolean} $dirty True if user has already interacted with the control.
 
+// The form content is valid
+// The form content is not valid
+// No fields have been modified yet
+// One or more have been modified
+// The form is submitted
+
+class FormPrivate;
+
 class Form : public QQuickItem
 {
 	Q_OBJECT
-	// The form content is valid
-	Q_PROPERTY(type valid READ valid NOTIFY validChanged)
-	// The form content is not valid
-	Q_PROPERTY(type invalid READ invalid NOTIFY invalidChanged)
-	// No fields have been modified yet
-	Q_PROPERTY(type pristine READ pristine NOTIFY pristineChanged)
-	// One or more have been modified
-	Q_PROPERTY(type dirty READ dirty NOTIFY dirtyChanged)
-	// The form is submitted
-	Q_PROPERTY(type submitted READ submitted NOTIFY submittedChanged)
+	Q_PROPERTY(bool valid READ valid NOTIFY validChanged)
+	Q_PROPERTY(bool invalid READ invalid NOTIFY invalidChanged)
+	Q_PROPERTY(bool pristine READ pristine NOTIFY pristineChanged)
+	Q_PROPERTY(bool dirty READ dirty NOTIFY dirtyChanged)
+	Q_PROPERTY(bool submitted READ submitted NOTIFY submittedChanged)
+	Q_PROPERTY(QJsonObject value READ value WRITE setValue NOTIFY valueChanged)
+	Q_PROPERTY(qreal spacing READ spacing WRITE setSpacing NOTIFY spacingChanged)
 	QML_ELEMENT
 public:
 	explicit Form(QQuickItem *parent = nullptr);
@@ -39,13 +45,24 @@ public:
 	bool pristine() const;
 	bool dirty() const;
 	bool submitted() const;
+	QJsonObject value() const;
+	void setValue(const QJsonObject &json);
+
+	qreal spacing() const;
+	void setSpacing(qreal d);
+
+public slots:
+	void reset();
+	void submit();
+
+protected:
+	void itemChange(ItemChange change, const ItemChangeData &value) override;
 
 private:
-	bool m_valid;
-	bool m_invalid;
-	bool m_pristine;
-	bool m_dirty;
-	bool m_submitted;
+	FormPrivate *m_ptr;
+
+private slots:
+	void checkValid();
 
 signals:
 	void validChanged();
@@ -53,6 +70,8 @@ signals:
 	void pristineChanged();
 	void dirtyChanged();
 	void submittedChanged();
+	void valueChanged();
+	void spacingChanged();
 };
 
 #endif // FORM_H
