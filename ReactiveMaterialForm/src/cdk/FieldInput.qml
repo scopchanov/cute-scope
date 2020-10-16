@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 TextField {
 	id: fieldInput
 
-	font { family: "Roboto"; pointSize: 12 }
+	font { family: "Roboto"; pointSize: 12; weight: Font.Medium }
 	color: palette.windowText
 	selectByMouse: true
 	background: Rectangle { color: "transparent" }

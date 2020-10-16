@@ -16,7 +16,9 @@ FormElement {
 	property string errorMessage: qsTr("Error message")
 	property bool isRequired: false
 	property bool isTouched: false
-	property alias text: fieldInput.text
+	required objectName
+
+//	value: fieldInput.text
 	
 	implicitWidth: 280
 	implicitHeight: 72
@@ -60,6 +62,7 @@ FormElement {
 			color: palette.highlight
 		}
 
+		// Input
 		FieldInput {
 			id: fieldInput
 
@@ -69,6 +72,8 @@ FormElement {
 			leftPadding: 16
 			rightPadding: 48
 			verticalAlignment: TextInput.AlignVCenter
+			text: value
+			onTextEdited: value = text
 		}
 
 		// Label

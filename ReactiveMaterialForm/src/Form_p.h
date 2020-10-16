@@ -17,7 +17,6 @@ class FormPrivate {
 	bool pristine;
 	bool dirty;
 	bool submitted;
-	QJsonObject value;
 	qreal spacing;
 
 	QQuickItem *lastItem;

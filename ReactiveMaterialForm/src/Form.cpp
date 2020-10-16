@@ -1,6 +1,7 @@
 #include "Form.h"
 #include "Form_p.h"
 #include "FormElement.h"
+#include <QJsonValue>
 #include <QDebug>
 
 Form::Form(QQuickItem *parent) :
@@ -41,19 +42,24 @@ bool Form::submitted() const
 
 QJsonObject Form::value() const
 {
+	QJsonObject json;
+
 	for (auto *item : childItems())
 		if (item->inherits("FormElement"))
-			qDebug() << qobject_cast<FormElement *>(item)->value();
+			json.insert(item->objectName(),
+						qobject_cast<FormElement *>(item)->value());
 
-	return m_ptr->value;
+	return json;
 }
 
 void Form::setValue(const QJsonObject &json)
 {
-	if (m_ptr->value.operator==(json))
-		return;
+	for (const QString &key : json.keys()) {
+		auto *formElement = findChild<FormElement *>(key);
 
-	m_ptr->value = json;
+		if (formElement)
+			formElement->setValue(json.value(key));
+	}
 
 	emit valueChanged();
 }

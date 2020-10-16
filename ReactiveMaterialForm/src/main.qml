@@ -28,12 +28,17 @@ ApplicationWindow {
 
 		Form {
 			id: form
+			value: {
+				"type": qsTr("Initially disabled field"),
+				"description": qsTr("Initial value")
+			}
 
 			Layout.fillWidth: true
 
 			FilledTextField {
 				id: editName
 
+				objectName: "name"
 				labelText: qsTr("Property 1")
 				helperText: qsTr("Type \"reveal\" to enable Property 2")
 				isRequired: true
@@ -42,17 +47,17 @@ ApplicationWindow {
 			FilledTextField {
 				id: editType
 
+				objectName: "type"
 				labelText: qsTr("Property 2")
-				enabled: editName.text === "reveal"
-				text: "Initially disabled field"
+				enabled: editName.value === "reveal"
 				helperText: qsTr("You may edit this field once it is enabled")
 			}
 
 			FilledTextField {
 				id: editDescription
 
+				objectName: "description"
 				labelText: qsTr("Label")
-				text: "Initial value"
 				helperText: qsTr("This field already contains a text")
 			}
 		}
@@ -60,7 +65,7 @@ ApplicationWindow {
 		RowLayout {
 			TextButton {
 				text: "Clear form"
-//				enabled: form.dirty
+				enabled: !form.pristine
 				onClicked: form.reset()
 			}
 
