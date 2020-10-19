@@ -1,10 +1,10 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import Scope.ReactiveForms 1.0
-import "cdk"
+import "../cdk"
 
 /*
- * Filled Text Field
+ * SLineEdit
  */
 
 FormElement {
@@ -16,16 +16,12 @@ FormElement {
 	property string errorMessage: qsTr("Error message")
 	property bool isRequired: false
 	property bool isTouched: false
-	required objectName
 
-//	value: fieldInput.text
-	
 	implicitWidth: 280
 	implicitHeight: 72
 	opacity: enabled ? 1 : 0.25
 
 	valid: !isRequired || !isEmpty
-	pristine: true
 
 	Behavior on opacity {
 		NumberAnimation {
@@ -42,6 +38,7 @@ FormElement {
 		anchors.bottomMargin: 16
 		radius: 4
 		color: fieldInput.hovered ? palette.light : palette.base
+
 		Rectangle {
 			id: bottomBorder
 

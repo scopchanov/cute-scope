@@ -14,7 +14,7 @@ Text {
 
 	y: originY
 	padding: 0
-	font.pointSize: 11
+	font.pointSize: 12
 	color: palette.text
 	transformOrigin: Item.TopLeft
 
@@ -41,8 +41,7 @@ Text {
 			name: "floating"
 			when: floating
 
-			PropertyChanges { target: root; y: 5 }
-			PropertyChanges { target: root; scale: 0.75 }
+			PropertyChanges { target: root; y: 7; scale: 0.75 }
 		}
 	]
 

@@ -20,7 +20,8 @@ Rectangle {
 
 		target: root
 		property: "scale"
-		from: 0; to: 2
+		from: 1; to: 2
 		duration: 350
+		easing.type: Easing.InOutQuad
 	}
 }
