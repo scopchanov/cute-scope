@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.12
 import Scope.ReactiveForms 1.0
 
 /*
- * SFormPanel
+ * Form Panel
  */
 
 Flickable {

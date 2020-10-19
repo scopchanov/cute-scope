@@ -4,7 +4,7 @@ import QtGraphicalEffects 1.15
 import "../cdk"
 
 /*
- * SPushButton
+ * Push Button
  */
 
 Item {

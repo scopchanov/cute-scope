@@ -16,5 +16,7 @@
         <file>components/TextButton.qml</file>
         <file>components/SFormPanel.qml</file>
         <file>ExampleForm.qml</file>
+        <file>cdk/Elevation.qml</file>
+        <file>cdk/Shadow.qml</file>
     </qresource>
 </RCC>

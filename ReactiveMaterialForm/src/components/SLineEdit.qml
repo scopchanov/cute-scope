@@ -4,7 +4,7 @@ import Scope.ReactiveForms 1.0
 import "../cdk"
 
 /*
- * SLineEdit
+ * Line Edit
  */
 
 FormElement {

@@ -4,7 +4,7 @@ import Scope.ReactiveForms 1.0
 import "../cdk"
 
 /*
- * SCheckBox
+ * CheckBox
  */
 
 FormElement {

@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtGraphicalEffects 1.12
+import "cdk"
 
 ApplicationWindow {
 	width: 480; height: 640
@@ -13,46 +13,15 @@ ApplicationWindow {
 	FontLoader { id: medium; source: "qrc:/bin/fonts/roboto/Roboto-Medium.ttf" }
 	FontLoader { id: bold; source: "qrc:/bin/fonts/roboto/Roboto-Bold.ttf" }
 
-	DropShadow {
-		anchors.fill: card
-		horizontalOffset: 0
-		verticalOffset: 2
-		radius: 1.0
-		spread: 0.4
-		samples: 25
-		color: Qt.rgba(0, 0, 0, 0.2)
+	Elevation {
 		source: card
+		distance: 2
 	}
-
-	DropShadow {
-		anchors.fill: card
-		horizontalOffset: 0
-		verticalOffset: 1
-		radius: 1.0
-		spread: 0.5
-		samples: 25
-		color: Qt.rgba(0, 0, 0, 0.14)
-		source: card
-	}
-
-	DropShadow {
-		anchors.fill: card
-		horizontalOffset: 0
-		verticalOffset: 1
-		radius: 3.0
-		spread: 0.5
-		samples: 25
-		color: Qt.rgba(0, 0, 0, 0.12)
-		source: card
-	}
-
-//	0px 2px 1px -1px , 0px 1px 1px 0px , 0px 1px 3px 0px
 
 	Rectangle {
 		id: card
 
-		width: 320
-		height: 480
+		width: 320; height: 480
 		anchors.centerIn: parent
 		radius: 6
 
