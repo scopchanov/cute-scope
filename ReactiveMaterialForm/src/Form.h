@@ -30,9 +30,7 @@ class Form : public QQuickItem
 {
 	Q_OBJECT
 	Q_PROPERTY(bool valid READ valid NOTIFY validChanged)
-	Q_PROPERTY(bool invalid READ invalid NOTIFY invalidChanged)
 	Q_PROPERTY(bool pristine READ pristine NOTIFY pristineChanged)
-	Q_PROPERTY(bool dirty READ dirty NOTIFY dirtyChanged)
 	Q_PROPERTY(bool submitted READ submitted NOTIFY submittedChanged)
 	Q_PROPERTY(QJsonObject value READ value WRITE setValue NOTIFY valueChanged)
 	Q_PROPERTY(qreal spacing READ spacing WRITE setSpacing NOTIFY spacingChanged)
@@ -41,9 +39,7 @@ public:
 	explicit Form(QQuickItem *parent = nullptr);
 
 	bool valid() const;
-	bool invalid() const;
 	bool pristine() const;
-	bool dirty() const;
 	bool submitted() const;
 	QJsonObject value() const;
 	void setValue(const QJsonObject &json);
@@ -52,23 +48,26 @@ public:
 	void setSpacing(qreal d);
 
 public slots:
+	void init(const QJsonObject &json);
 	void reset();
 	void submit();
 
 protected:
+	void mousePressEvent(QMouseEvent *event) override;
 	void itemChange(ItemChange change, const ItemChangeData &value) override;
 
 private:
 	FormPrivate *m_ptr;
 
 private slots:
+	void checkPristine();
 	void checkValid();
+	void onImplicitWidthChanged();
+	void onImplicitHeightChanged();
 
 signals:
 	void validChanged();
-	void invalidChanged();
 	void pristineChanged();
-	void dirtyChanged();
 	void submittedChanged();
 	void valueChanged();
 	void spacingChanged();

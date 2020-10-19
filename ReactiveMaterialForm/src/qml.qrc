@@ -2,14 +2,19 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>FilledTextField.qml</file>
-        <file>ContainedButton.qml</file>
-        <file>Ripple.qml</file>
-        <file>TextButton.qml</file>
-        <file>ButtonLabel.qml</file>
         <file>cdk/FieldActivationIndicator.qml</file>
         <file>cdk/FieldIcon.qml</file>
         <file>cdk/FieldInput.qml</file>
         <file>cdk/FieldLabel.qml</file>
+        <file>cdk/CheckboxMark.qml</file>
+        <file>cdk/Ripple.qml</file>
+        <file>cdk/ButtonLabel.qml</file>
+        <file>components/SCheckBox.qml</file>
+        <file>components/SComboBox.qml</file>
+        <file>components/SLineEdit.qml</file>
+        <file>components/SPushButton.qml</file>
+        <file>components/TextButton.qml</file>
+        <file>components/SFormPanel.qml</file>
+        <file>ExampleForm.qml</file>
     </qresource>
 </RCC>

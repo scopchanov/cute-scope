@@ -1,79 +1,63 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.12
-import Scope.ReactiveForms 1.0
+import QtGraphicalEffects 1.12
 
 ApplicationWindow {
-	width: 640
-	height: 480
+	width: 480; height: 640
 	visible: true
-	title: qsTr("Material Filled Text Fields")
-	color: "white"
+	title: qsTr("Reactive Form")
+	minimumWidth: card.implicitWidth
+	minimumHeight: 100
 
 	FontLoader { id: regular; source: "qrc:/bin/fonts/roboto/Roboto-Regular.ttf" }
 	FontLoader { id: medium; source: "qrc:/bin/fonts/roboto/Roboto-Medium.ttf" }
 	FontLoader { id: bold; source: "qrc:/bin/fonts/roboto/Roboto-Bold.ttf" }
 
-	Pane {
-		anchors.fill: parent
-		focusPolicy: Qt.ClickFocus
+	DropShadow {
+		anchors.fill: card
+		horizontalOffset: 0
+		verticalOffset: 2
+		radius: 1.0
+		spread: 0.4
+		samples: 25
+		color: Qt.rgba(0, 0, 0, 0.2)
+		source: card
 	}
 
-	ColumnLayout {
-		anchors.top: parent.top
-		anchors.left: parent.left
-		anchors.right: parent.right
-		anchors.margins: 20
-		spacing: 15
+	DropShadow {
+		anchors.fill: card
+		horizontalOffset: 0
+		verticalOffset: 1
+		radius: 1.0
+		spread: 0.5
+		samples: 25
+		color: Qt.rgba(0, 0, 0, 0.14)
+		source: card
+	}
 
-		Form {
-			id: form
-			value: {
-				"type": qsTr("Initially disabled field"),
-				"description": qsTr("Initial value")
-			}
+	DropShadow {
+		anchors.fill: card
+		horizontalOffset: 0
+		verticalOffset: 1
+		radius: 3.0
+		spread: 0.5
+		samples: 25
+		color: Qt.rgba(0, 0, 0, 0.12)
+		source: card
+	}
 
-			Layout.fillWidth: true
+//	0px 2px 1px -1px , 0px 1px 1px 0px , 0px 1px 3px 0px
 
-			FilledTextField {
-				id: editName
+	Rectangle {
+		id: card
 
-				objectName: "name"
-				labelText: qsTr("Property 1")
-				helperText: qsTr("Type \"reveal\" to enable Property 2")
-				isRequired: true
-			}
+		width: 320
+		height: 480
+		anchors.centerIn: parent
+		radius: 6
 
-			FilledTextField {
-				id: editType
-
-				objectName: "type"
-				labelText: qsTr("Property 2")
-				enabled: editName.value === "reveal"
-				helperText: qsTr("You may edit this field once it is enabled")
-			}
-
-			FilledTextField {
-				id: editDescription
-
-				objectName: "description"
-				labelText: qsTr("Label")
-				helperText: qsTr("This field already contains a text")
-			}
-		}
-
-		RowLayout {
-			TextButton {
-				text: "Clear form"
-				enabled: !form.pristine
-				onClicked: form.reset()
-			}
-
-			ContainedButton {
-				text: "Add Input"
-				enabled: form.valid
-				onClicked: form.submit()
-			}
+		ExampleForm {
+			anchors.fill: parent
 		}
 	}
 }

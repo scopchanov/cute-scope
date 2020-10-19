@@ -10,16 +10,19 @@ class FormPrivate {
 
 	Q_DISABLE_COPY(FormPrivate);
 
-	explicit FormPrivate();
+	explicit FormPrivate(Form *parent);
 
+	bool checkFieldsProperty(const QString &name);
+
+	Form *p_ptr;
+
+	QQuickItem *formLayout;
 	bool valid;
 	bool invalid;
 	bool pristine;
 	bool dirty;
 	bool submitted;
 	qreal spacing;
-
-	QQuickItem *lastItem;
 
 	friend class Form;
 };

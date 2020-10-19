@@ -4,9 +4,10 @@
 
 FormElement::FormElement(QQuickItem *parent) :
 	QQuickItem(parent),
-	m_ptr(new FormElementPrivate)
+	m_ptr(new FormElementPrivate(this))
 {
-
+//	setActiveFocusOnTab(true);
+	scopedFocusItem();
 }
 
 bool FormElement::valid() const
@@ -24,24 +25,9 @@ void FormElement::setValid(bool b)
 	emit validChanged();
 }
 
-bool FormElement::invalid() const
-{
-	return m_ptr->invalid;
-}
-
 bool FormElement::pristine() const
 {
 	return m_ptr->pristine;
-}
-
-void FormElement::setPristine(bool b)
-{
-	if (m_ptr->pristine == b)
-		return;
-
-	m_ptr->pristine = b;
-
-	emit pristineChanged();
 }
 
 bool FormElement::touched() const
@@ -69,14 +55,34 @@ void FormElement::setValue(const QJsonValue &val)
 	if (m_ptr->value == val)
 		return;
 
+	m_ptr->setPristine(m_ptr->defaultValue == val);
+
 	m_ptr->value = val;
 
 	emit valueChanged();
 }
 
+void FormElement::init(const QJsonValue &val)
+{
+	m_ptr->value = val;
+	m_ptr->defaultValue = val;
+
+	valueChanged();
+}
+
+void FormElement::accept()
+{
+	m_ptr->defaultValue = m_ptr->value;
+}
+
+void FormElement::reject()
+{
+
+}
+
 void FormElement::reset()
 {
-	setValue(QJsonValue());
+	setValue(m_ptr->defaultValue);
 }
 
 void FormElement::clear()
@@ -94,11 +100,21 @@ void FormElement::focusOutEvent(QFocusEvent *event)
 	qDebug() << "out:" << event->reason();
 }
 
-FormElementPrivate::FormElementPrivate() :
+FormElementPrivate::FormElementPrivate(FormElement *parent) :
+	p_ptr(parent),
 	valid(false),
-	invalid(false),
 	pristine(true),
 	touched(false)
 {
 
+}
+
+void FormElementPrivate::setPristine(bool b)
+{
+	if (pristine == b)
+		return;
+
+	pristine = b;
+
+	emit p_ptr->pristineChanged();
 }

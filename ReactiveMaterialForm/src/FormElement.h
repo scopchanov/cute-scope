@@ -10,9 +10,7 @@ class FormElement : public QQuickItem
 {
 	Q_OBJECT
 	Q_PROPERTY(bool valid READ valid WRITE setValid NOTIFY validChanged)
-	Q_PROPERTY(bool invalid READ invalid NOTIFY invalidChanged)
-	Q_PROPERTY(bool pristine READ pristine WRITE setPristine
-			   NOTIFY pristineChanged)
+	Q_PROPERTY(bool pristine READ pristine NOTIFY pristineChanged)
 	Q_PROPERTY(bool touched READ touched WRITE setTouched NOTIFY touchedChanged)
 	Q_PROPERTY(QJsonValue value READ value WRITE setValue NOTIFY valueChanged)
 	QML_ELEMENT
@@ -21,15 +19,16 @@ public:
 
 	bool valid() const;
 	void setValid(bool b);
-	bool invalid() const;
 	bool pristine() const;
-	void setPristine(bool b);
 	bool touched() const;
 	void setTouched(bool b);
 	QJsonValue value() const;
 	void setValue(const QJsonValue &val);
 
 public slots:
+	void init(const QJsonValue &val);
+	void accept();
+	void reject();
 	void reset();
 	void clear();
 

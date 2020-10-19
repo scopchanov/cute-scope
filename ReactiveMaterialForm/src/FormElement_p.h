@@ -9,13 +9,17 @@ class FormElementPrivate {
 
 	Q_DISABLE_COPY(FormElementPrivate);
 
-	explicit FormElementPrivate();
+	explicit FormElementPrivate(FormElement *parent);
+
+	void setPristine(bool b);
+
+	FormElement *p_ptr;
 
 	bool valid;
-	bool invalid;
 	bool pristine;
 	bool touched;
 	QJsonValue value;
+	QJsonValue defaultValue;
 
 	friend class FormElement;
 };
