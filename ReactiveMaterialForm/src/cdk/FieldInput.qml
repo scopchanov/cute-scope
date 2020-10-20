@@ -30,5 +30,6 @@ TextField {
 
 	onEditingFinished: {
 		console.log("changed")
+		focus = false
 	}
 }

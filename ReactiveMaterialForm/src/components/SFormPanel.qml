@@ -10,9 +10,11 @@ import Scope.ReactiveForms 1.0
 Flickable {
 	id: root
 
-	default property alias content: form.children
-	property alias form: form
+	default property alias formElements: form.formElements
 	property alias actions: actionRow.children
+	property alias pristine: form.pristine
+	property alias valid: form.valid
+	property alias value: form.value
 
 	contentWidth: pane.width
 	contentHeight: pane.height
@@ -25,11 +27,11 @@ Flickable {
 		id: pane
 
 		width: root.width
-		contentWidth: children.implicitWidth
-		contentHeight: children.implicitHeight
+		contentWidth: columnLayout.implicitWidth
+		contentHeight: columnLayout.implicitHeight
 		padding: 20
 		focusPolicy: Qt.ClickFocus
-		background: Rectangle { color: "transparent" }
+		background: Rectangle { color: palette.base }
 
 		ColumnLayout {
 			id: columnLayout
@@ -41,15 +43,16 @@ Flickable {
 				id: form
 
 				Layout.fillWidth: true
-				spacing: 15
+				implicitHeight: background.implicitHeight
+
+				background: ColumnLayout {
+					width: parent.width
+					spacing: 15
+				}
 			}
 
-
-			Item {
+			RowLayout {
 				id: actionRow
-
-				Layout.fillWidth: true
-				implicitHeight: childrenRect.height
 			}
 		}
 	}

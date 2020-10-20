@@ -7,7 +7,7 @@ FormElement::FormElement(QQuickItem *parent) :
 	m_ptr(new FormElementPrivate(this))
 {
 //	setActiveFocusOnTab(true);
-	scopedFocusItem();
+//	scopedFocusItem();
 }
 
 bool FormElement::valid() const

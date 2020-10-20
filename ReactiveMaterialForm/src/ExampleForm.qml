@@ -1,9 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
+import Scope.ReactiveForms 1.0
 import "components"
-
-SFormPanel {
-	id: formPanel
+import "cdk"
 
 //		Component.onCompleted: {
 //			formPanel.form.init({
@@ -12,6 +11,9 @@ SFormPanel {
 //									"property7": qsTr("Initial value")
 //								})
 //		}
+
+SFormPanel {
+	id: root
 
 	SComboBox {
 		id: comboField
@@ -76,27 +78,27 @@ SFormPanel {
 	SLineEdit {
 		id: property7
 
+//		Form.form: "1977-10-11"
+
 		Layout.fillWidth: true
 		objectName: "property7"
 		labelText: qsTr("Text property with a default value")
 		helperText: qsTr("This field already contains a text")
+
+		Component.onCompleted: console.log(Form.form)
 	}
 
-	actions: RowLayout {
-		width: children.implicitWidth
-		height: children.implicitHeight
-
+	actions: [
 		TextButton {
 			Layout.fillHeight: true
 			text: qsTr("Reset")
-			enabled: !formPanel.form.pristine
-			onClicked: formPanel.form.reset()
-		}
-
+//			enabled: !form.pristine
+			onClicked: { console.log(property7.Form.form); form.reset() }
+		},
 		SPushButton {
 			text: qsTr("Submit")
-			enabled: formPanel.form.valid
-			onClicked: formPanel.form.submit()
+			enabled: form.valid
+			onClicked: form.submit()
 		}
-	}
+	]
 }

@@ -18,5 +18,7 @@
         <file>ExampleForm.qml</file>
         <file>cdk/Elevation.qml</file>
         <file>cdk/Shadow.qml</file>
+        <file>components/SCard.qml</file>
+        <file>cdk/FieldSelect.qml</file>
     </qresource>
 </RCC>

@@ -24,7 +24,28 @@
 // One or more have been modified
 // The form is submitted
 
+
+class FormAttachedType : public QObject
+{
+	Q_OBJECT
+	Q_PROPERTY(QDate form READ form WRITE setForm NOTIFY formChanged)
+	QML_ANONYMOUS
+public:
+	FormAttachedType(QObject *parent);
+
+	QDate form() const;
+	void setForm(QDate form);
+
+private:
+	QDate m_form;
+
+signals:
+	void formChanged();
+};
+
+//class Form;
 class FormPrivate;
+class FormElement;
 
 class Form : public QQuickItem
 {
@@ -33,7 +54,11 @@ class Form : public QQuickItem
 	Q_PROPERTY(bool pristine READ pristine NOTIFY pristineChanged)
 	Q_PROPERTY(bool submitted READ submitted NOTIFY submittedChanged)
 	Q_PROPERTY(QJsonObject value READ value WRITE setValue NOTIFY valueChanged)
-	Q_PROPERTY(qreal spacing READ spacing WRITE setSpacing NOTIFY spacingChanged)
+	Q_PROPERTY(QQuickItem *background READ background WRITE setBackground
+			   NOTIFY backgroundChanged REQUIRED)
+	Q_PROPERTY(QQmlListProperty<FormElement> formElements READ formElements)
+	QML_ATTACHED(FormAttachedType)
+	Q_CLASSINFO("DefaultProperty", "formElements")
 	QML_ELEMENT
 public:
 	explicit Form(QQuickItem *parent = nullptr);
@@ -44,33 +69,46 @@ public:
 	QJsonObject value() const;
 	void setValue(const QJsonObject &json);
 
-	qreal spacing() const;
-	void setSpacing(qreal d);
+	QQuickItem *background() const;
+	void setBackground(QQuickItem *item);
+
+	QQmlListProperty<FormElement> formElements();
+	void appendElement(FormElement *formElement);
+	int elementCount() const;
+	FormElement *element(int n) const;
+	void clearElements();
+	void replaceElement(int n, FormElement *formElement);
+	void removeLastElement();
+
+	static FormAttachedType *qmlAttachedProperties(QObject *parent);
 
 public slots:
 	void init(const QJsonObject &json);
 	void reset();
 	void submit();
 
-protected:
-	void mousePressEvent(QMouseEvent *event) override;
-	void itemChange(ItemChange change, const ItemChangeData &value) override;
-
 private:
+	static void appendElement(QQmlListProperty<FormElement> *list,
+							  FormElement *formElement);
+	static int elementCount(QQmlListProperty<FormElement> *list);
+	static FormElement* element(QQmlListProperty<FormElement> *list, int n);
+	static void clearElements(QQmlListProperty<FormElement> *list);
+	static void replaceElement(QQmlListProperty<FormElement> *list, int n,
+							 FormElement *formElement);
+	static void removeLastElement(QQmlListProperty<FormElement> *list);
+
 	FormPrivate *m_ptr;
 
 private slots:
 	void checkPristine();
 	void checkValid();
-	void onImplicitWidthChanged();
-	void onImplicitHeightChanged();
 
 signals:
 	void validChanged();
 	void pristineChanged();
 	void submittedChanged();
 	void valueChanged();
-	void spacingChanged();
+	void backgroundChanged();
 };
 
 #endif // FORM_H

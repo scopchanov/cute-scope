@@ -2,9 +2,11 @@
 #define FORM_P_H
 
 #include <QtCore>
+#include <QQmlListProperty>
 
-class Form;
 class QQuickItem;
+class Form;
+class FormElement;
 
 class FormPrivate {
 
@@ -12,17 +14,19 @@ class FormPrivate {
 
 	explicit FormPrivate(Form *parent);
 
-	bool checkFieldsProperty(const QString &name);
+	FormElement *findFormElement(const QString &name);
+	bool checkProperty(const QString &name);
 
 	Form *p_ptr;
 
-	QQuickItem *formLayout;
+	QQuickItem *background;
 	bool valid;
 	bool invalid;
 	bool pristine;
 	bool dirty;
 	bool submitted;
 	qreal spacing;
+	QVector<FormElement *> formElements;
 
 	friend class Form;
 };

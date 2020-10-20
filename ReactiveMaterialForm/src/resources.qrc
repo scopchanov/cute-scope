@@ -7,5 +7,6 @@
     <qresource prefix="/pix">
         <file>images/icons/24/clear-full.png</file>
         <file>images/icons/24/clear-outline.png</file>
+        <file>images/icons/24/indicator-down.png</file>
     </qresource>
 </RCC>

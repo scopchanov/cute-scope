@@ -10,7 +10,7 @@ import "../cdk"
 FormElement {
 	id: root
 
-	readonly property bool isEmpty: comboBox.currentValue === "undefined"
+	readonly property bool isEmpty: comboBox.currentValue === null
 	property string labelText: qsTr("Label")
 	property string helperText: qsTr("Helper text")
 	property string errorMessage: qsTr("Error message")
@@ -22,6 +22,7 @@ FormElement {
 	opacity: enabled ? 1 : 0.25
 
 	valid: true
+
 	// Container
 	Rectangle {
 		id: container
@@ -52,7 +53,7 @@ FormElement {
 		}
 
 		// Select
-		ComboBox {
+		FieldSelect {
 			id: comboBox
 
 			anchors.fill: parent
@@ -60,94 +61,13 @@ FormElement {
 			bottomPadding: 8
 			leftPadding: 16
 			rightPadding: 48
-//			text: value
-//			onTextEdited: value = text
-			textRole: "text"
-			valueRole: "value"
+			displayText: isEmpty ? "" : currentText
 
 			model: [
-				{ text: "--" },
-				{ value: Qt.NoModifier, text: qsTr("No modifier") },
-				{ value: Qt.ShiftModifier, text: qsTr("Shift") },
-				{ value: Qt.ControlModifier, text: qsTr("Control") }
+				{ value: null, text: "--" },
+				{ value: 0, text: qsTr("Make") },
+				{ value: 1, text: qsTr("Break") },
 			]
-
-			delegate: ItemDelegate {
-				width: comboBox.width
-				contentItem: Text {
-					text: modelData.text
-					color: "#21be2b"
-					font: comboBox.font
-					elide: Text.ElideRight
-					verticalAlignment: Text.AlignVCenter
-				}
-				highlighted: comboBox.highlightedIndex === index
-			}
-
-//			indicator: Canvas {
-//				id: canvas
-//				x: comboBox.width - width - comboBox.rightPadding
-//				y: comboBox.topPadding + (comboBox.availableHeight - height) / 2
-//				width: 12
-//				height: 8
-//				contextType: "2d"
-
-//				Connections {
-//					target: comboBox
-//					function onPressedChanged() { canvas.requestPaint(); }
-//				}
-
-//				onPaint: {
-//					context.reset();
-//					context.moveTo(0, 0);
-//					context.lineTo(width, 0);
-//					context.lineTo(width / 2, height);
-//					context.closePath();
-//					context.fillStyle = comboBox.pressed ? "#17a81a" : "#21be2b";
-//					context.fill();
-//				}
-//			}
-
-			contentItem: Text {
-				leftPadding: 0
-				rightPadding: comboBox.indicator.width + comboBox.spacing
-
-				text: comboBox.displayText
-				font: comboBox.font
-				color: comboBox.pressed ? "#17a81a" : "#21be2b"
-				verticalAlignment: Text.AlignVCenter
-				elide: Text.ElideRight
-			}
-
-			background: Rectangle {
-//				implicitWidth: 120
-//				implicitHeight: 40
-//				border.color: comboBox.pressed ? "#17a81a" : "#21be2b"
-//				border.width: comboBox.visualFocus ? 2 : 1
-				color: "transparent"
-				radius: 2
-			}
-
-			popup: Popup {
-				y: comboBox.height - 1
-				width: comboBox.width
-				implicitHeight: contentItem.implicitHeight
-				padding: 1
-
-				contentItem: ListView {
-					clip: true
-					implicitHeight: contentHeight
-					model: comboBox.popup.visible ? comboBox.delegateModel : null
-					currentIndex: comboBox.highlightedIndex
-
-					ScrollIndicator.vertical: ScrollIndicator { }
-				}
-
-				background: Rectangle {
-					border.color: "#21be2b"
-					radius: 2
-				}
-			}
 		}
 
 		// Label
@@ -157,24 +77,15 @@ FormElement {
 			x: comboBox.leftPadding
 			originY: 0.5*(parent.height - height)
 			highlighted: comboBox.activeFocus
-//			floating: !isEmpty
+			floating: !isEmpty
 			text: isRequired ? labelText + " *" : labelText
 		}
 
-		// Trailing Icon
-		FieldIcon {
+		Image {
+			source: "/pix/images/icons/24/indicator-down.png"
 			anchors.verticalCenter: container.verticalCenter
 			anchors.right: parent.right
 			anchors.rightMargin: 12
-			visible: !isEmpty
-			iconSource: "/pix/images/icons/24/clear-outline.png"
-
-			onClicked: {
-				comboBox.popup.open()
-
-				if (state !== "focused")
-					focus = true
-			}
 		}
 	}
 
