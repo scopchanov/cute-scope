@@ -70,7 +70,7 @@ SFormPanel {
 
 		Layout.fillWidth: true
 		objectName: "property6"
-		visible: property5.value
+		shown: property5.value
 		labelText: qsTr("Initially hidden text property")
 		helperText: qsTr("This property has a default value")
 	}

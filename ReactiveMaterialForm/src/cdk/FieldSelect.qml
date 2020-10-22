@@ -14,10 +14,10 @@ ComboBox {
 	delegate: ItemDelegate {
 		width: root.width
 
-		contentItem: Text {
+		contentItem: Label {
 			text: modelData.text
-			color: palette.windowText
-			font: root.font
+			color: root.currentIndex === index ? palette.windowText : palette.text
+			font.weight: root.currentIndex === index ? Font.Medium : Font.Normal
 			elide: Text.ElideRight
 			verticalAlignment: Text.AlignVCenter
 		}
@@ -44,19 +44,19 @@ ComboBox {
 	background: Rectangle { color: "transparent" }
 
 	popup: Popup {
-		y: root.y//.height + 5
+		y: root.y
 		width: root.width
-		padding: 1
+		padding: 0
 
 		contentItem: ListView {
 			id: listView
 
-			clip: true
 			implicitHeight: contentHeight
 			model: root.popup.visible ? root.delegateModel : null
 			currentIndex: root.highlightedIndex
+			clip: true
 
-			ScrollIndicator.vertical: ScrollIndicator { }
+			ScrollIndicator.vertical: ScrollIndicator {  }
 		}
 
 		background: Item {

@@ -16,6 +16,7 @@ FormElement {
 	property string errorMessage: qsTr("Error message")
 	property bool isRequired: false
 	property bool isTouched: false
+	property bool shown: true
 
 	implicitWidth: 280
 	implicitHeight: 72
@@ -34,6 +35,7 @@ FormElement {
 	Rectangle {
 		id: container
 
+		clip: true
 		anchors.fill: parent
 		anchors.bottomMargin: 16
 		radius: 4
@@ -114,11 +116,77 @@ FormElement {
 		text: helperText
 	}
 
-	states: State {
-		name: "error"
-		when: isRequired && isTouched && isEmpty
+	states: [
+		State {
+			name: "error"
+			when: isRequired && isTouched && isEmpty
 
-		PropertyChanges { target: label; error: true }
-		PropertyChanges { target: activationIndicator; color: "#F44336" }
-	}
+			PropertyChanges { target: label; error: true }
+			PropertyChanges { target: activationIndicator; color: "#F44336" }
+		},
+		State {
+			name: "hidden"
+			when: !shown
+
+			PropertyChanges { target: root; visible: false }
+		}
+	]
+
+	transitions: [
+		Transition {
+			to: "hidden"
+
+			SequentialAnimation {
+				PropertyAction {
+					target: root
+					property: "visible"
+					value: true
+				}
+
+				ParallelAnimation {
+					NumberAnimation {
+						target: root
+						property: "implicitHeight"
+						to: 0.0
+						duration: 250
+						easing.type: Easing.InOutQuad
+					}
+
+					NumberAnimation {
+						target: root
+						property: "opacity"
+						from: 1.0; to: 0.0
+						duration: 250
+						easing.type: Easing.InOutQuad
+					}
+				}
+
+				PropertyAction {
+					target: root
+					property: "visible"
+					value: false
+				}
+			}
+		},
+		Transition {
+			from: "hidden"
+
+			ParallelAnimation {
+				NumberAnimation {
+					target: root
+					property: "implicitHeight"
+					from: 0.0; to: 72.0
+					duration: 250
+					easing.type: Easing.InOutQuad
+				}
+
+				NumberAnimation {
+					target: root
+					property: "opacity"
+					from: 0.0; to: 1.0
+					duration: 250
+					easing.type: Easing.InOutQuad
+				}
+			}
+		}]
 }

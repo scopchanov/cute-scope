@@ -20,5 +20,6 @@
         <file>cdk/Shadow.qml</file>
         <file>components/SCard.qml</file>
         <file>cdk/FieldSelect.qml</file>
+        <file>cdk/ExpansionPanel.qml</file>
     </qresource>
 </RCC>
