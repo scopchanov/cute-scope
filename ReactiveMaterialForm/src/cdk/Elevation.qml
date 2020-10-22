@@ -41,72 +41,60 @@ Item {
 			when: distance === 2
 
 			PropertyChanges {
-				target: keyShadow
-				verticalOffset: 3; radius: 1.0
+				target: keyShadow; verticalOffset: 3; radius: 1.0
 			}
 
 			PropertyChanges {
-				target: ambientShadow
-				verticalOffset: 2; radius: 2.0
+				target: ambientShadow; verticalOffset: 2; radius: 2.0
 			}
 
 			PropertyChanges {
-				target: fillShadow
-				verticalOffset: 1; radius: 5.0
+				target: fillShadow; verticalOffset: 1; radius: 5.0
 			}
 		},
 		State {
 			when: distance === 3
 
 			PropertyChanges {
-				target: keyShadow
-				verticalOffset: 3; radius: 3.0
+				target: keyShadow; verticalOffset: 3; radius: 3.0
 			}
 
 			PropertyChanges {
-				target: ambientShadow
-				verticalOffset: 3; radius: 4.0
+				target: ambientShadow; verticalOffset: 3; radius: 4.0
 			}
 
 			PropertyChanges {
-				target: fillShadow
-				verticalOffset: 1; radius: 8.0
+				target: fillShadow; verticalOffset: 1; radius: 8.0
 			}
 		},
 		State {
 			when: distance === 4
 
 			PropertyChanges {
-				target: keyShadow
-				verticalOffset: 2; radius: 4.0
+				target: keyShadow; verticalOffset: 2; radius: 4.0
 			}
 
 			PropertyChanges {
-				target: ambientShadow
-				verticalOffset: 4; radius: 5.0
+				target: ambientShadow; verticalOffset: 4; radius: 5.0
 			}
 
 			PropertyChanges {
-				target: fillShadow
-				verticalOffset: 1; radius: 10.0
+				target: fillShadow; verticalOffset: 1; radius: 10.0
 			}
 		},
 		State {
 			when: distance === 8
 
 			PropertyChanges {
-				target: keyShadow
-				verticalOffset: 5; radius: 5.0
+				target: keyShadow; verticalOffset: 5; radius: 5.0
 			}
 
 			PropertyChanges {
-				target: ambientShadow
-				verticalOffset: 8; radius: 10.0
+				target: ambientShadow; verticalOffset: 8; radius: 10.0
 			}
 
 			PropertyChanges {
-				target: fillShadow
-				verticalOffset: 3; radius: 14.0
+				target: fillShadow; verticalOffset: 3; radius: 14.0
 			}
 		}
 	]
