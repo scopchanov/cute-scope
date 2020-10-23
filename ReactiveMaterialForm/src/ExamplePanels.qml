@@ -19,11 +19,13 @@ ColumnLayout {
 		contentWidth: columnLayout.width
 		contentHeight: columnLayout.height
 		flickableDirection: Flickable.VerticalFlick
+		ScrollBar.vertical: ScrollBar {}
 
 		ColumnLayout {
 			id: columnLayout
 
 			width: flickable.width
+			spacing: 8
 
 			SExpansionPanel {
 				Layout.fillWidth: true

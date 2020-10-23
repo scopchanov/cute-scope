@@ -24,5 +24,6 @@
         <file>cdk/Collapsible.qml</file>
         <file>components/SIconButton.qml</file>
         <file>ExamplePanels.qml</file>
+        <file>cdk/ExpandedIndicator.qml</file>
     </qresource>
 </RCC>

@@ -12,7 +12,7 @@ Item {
 
 	implicitHeight: base.height
 
-	Elevation { source: base }
+	Elevation { source: base; distance: 2 }
 
 	Rectangle {
 		id: base
@@ -29,13 +29,11 @@ Item {
 			height: implicitHeight
 			spacing: 0
 
-			AbstractButton {
+			Item {
 				id: btnHeader
 
 				Layout.fillWidth: true
 				implicitHeight: 44
-
-				onClicked: panel.toggle()
 
 				RowLayout {
 					anchors.fill: parent
@@ -45,7 +43,7 @@ Item {
 						id: labelTitle
 
 						Layout.fillWidth: true
-						Layout.leftMargin: 10
+						Layout.leftMargin: 20
 						color: palette.windowText
 						font.pointSize: 11
 						font.weight: Font.Medium
@@ -59,43 +57,19 @@ Item {
 						font.pointSize: 11
 					}
 
-					Image {
+					ExpandedIndicator {
 						id: indicator
-						Layout.rightMargin: 10
 
+						Layout.rightMargin: 15
+						expanded: panel.expanded
 						source: "../pix/images/icons/16/arrow-down.png"
-
-						states: State {
-							name: "up"
-							when: panel.expanded
-
-							PropertyChanges {
-								target: indicator
-								rotation: 180
-							}
-						}
-
-						transitions: [
-							Transition {
-								to: "up"
-
-								RotationAnimation {
-									duration: 250
-									direction: RotationAnimation.Clockwise
-									easing.type: Easing.InOutQuad
-								}
-							},
-							Transition {
-								from: "up"
-
-								RotationAnimation {
-									duration: 250
-									direction: RotationAnimation.Counterclockwise
-									easing.type: Easing.InOutQuad
-								}
-							}
-						]
 					}
+				}
+
+				MouseArea {
+					anchors.fill: parent
+					onClicked: panel.toggle()
+					cursorShape: Qt.PointingHandCursor
 				}
 			}
 
