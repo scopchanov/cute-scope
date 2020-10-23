@@ -1,8 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
 import Scope.ReactiveForms 1.0
-import "components"
-import "cdk"
+import "../components"
+import "../cdk"
 
 //		Component.onCompleted: {
 //			formPanel.form.init({

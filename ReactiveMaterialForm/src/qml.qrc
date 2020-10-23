@@ -15,7 +15,6 @@
         <file>components/SPushButton.qml</file>
         <file>components/TextButton.qml</file>
         <file>components/SFormPanel.qml</file>
-        <file>ExampleForm.qml</file>
         <file>cdk/Elevation.qml</file>
         <file>cdk/Shadow.qml</file>
         <file>components/SCard.qml</file>
@@ -23,7 +22,8 @@
         <file>components/SExpansionPanel.qml</file>
         <file>cdk/Collapsible.qml</file>
         <file>components/SIconButton.qml</file>
-        <file>ExamplePanels.qml</file>
         <file>cdk/ExpandedIndicator.qml</file>
+        <file>examples/ExampleForm.qml</file>
+        <file>examples/ExamplePanels.qml</file>
     </qresource>
 </RCC>
