@@ -83,6 +83,51 @@ Item {
 			}
 		},
 		State {
+			when: distance === 5
+
+			PropertyChanges {
+				target: keyShadow; verticalOffset: 3; radius: 5.0
+			}
+
+			PropertyChanges {
+				target: ambientShadow; verticalOffset: 5; radius: 8.0
+			}
+
+			PropertyChanges {
+				target: fillShadow; verticalOffset: 1; radius: 14.0
+			}
+		},
+		State {
+			when: distance === 6
+
+			PropertyChanges {
+				target: keyShadow; verticalOffset: 3; radius: 5.0
+			}
+
+			PropertyChanges {
+				target: ambientShadow; verticalOffset: 6; radius: 10.0
+			}
+
+			PropertyChanges {
+				target: fillShadow; verticalOffset: 1; radius: 18.0
+			}
+		},
+		State {
+			when: distance === 7
+
+			PropertyChanges {
+				target: keyShadow; verticalOffset: 4; radius: 5.0
+			}
+
+			PropertyChanges {
+				target: ambientShadow; verticalOffset: 7; radius: 10.0
+			}
+
+			PropertyChanges {
+				target: fillShadow; verticalOffset: 2; radius: 16.0
+			}
+		},
+		State {
 			when: distance === 8
 
 			PropertyChanges {

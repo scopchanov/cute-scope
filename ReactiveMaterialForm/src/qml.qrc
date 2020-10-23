@@ -25,5 +25,7 @@
         <file>cdk/ExpandedIndicator.qml</file>
         <file>examples/ExampleForm.qml</file>
         <file>examples/ExamplePanels.qml</file>
+        <file>components/SSnackBar.qml</file>
+        <file>examples/ExampleSnack.qml</file>
     </qresource>
 </RCC>

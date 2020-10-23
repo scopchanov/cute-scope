@@ -1,8 +1,12 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.12
 import "examples"
+import "components"
 
 ApplicationWindow {
+	id: window
+
 	width: 480; height: 480
 	visible: true
 	title: qsTr("Reactive Form")
@@ -19,9 +23,13 @@ ApplicationWindow {
 //		anchors.fill: parent
 //	}
 
-	ExamplePanels {
-		width: 400
-		height: parent.height
-		anchors.centerIn: parent
+//	ExamplePanels {
+//		width: 400
+//		height: parent.height
+//		anchors.centerIn: parent
+//	}
+
+	ExampleSnack {
+		anchors.fill: parent
 	}
 }
