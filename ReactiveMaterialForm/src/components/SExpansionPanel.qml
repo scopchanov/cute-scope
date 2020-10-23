@@ -8,6 +8,7 @@ Item {
 
 	default property alias content: panel.content
 	property alias title: labelTitle.text
+	property alias subtitle: labelSubTitle.text
 
 	implicitHeight: base.height
 
@@ -28,23 +29,73 @@ Item {
 			height: implicitHeight
 			spacing: 0
 
-			RowLayout {
-				id: titleLayout
+			AbstractButton {
+				id: btnHeader
 
-				Label {
-					id: labelTitle
+				Layout.fillWidth: true
+				implicitHeight: 44
 
-					Layout.leftMargin: 10
-					color: palette.windowText
-				}
+				onClicked: panel.toggle()
 
-				Item {
-					Layout.fillWidth: true
-				}
+				RowLayout {
+					anchors.fill: parent
+					spacing: 0
 
-				ToolButton {
-					icon.source: "../pix/images/icons/16/arrow-down.png"
-					onClicked: panel.toggle()
+					Label {
+						id: labelTitle
+
+						Layout.fillWidth: true
+						Layout.leftMargin: 10
+						color: palette.windowText
+						font.pointSize: 11
+						font.weight: Font.Medium
+					}
+
+					Label {
+						id: labelSubTitle
+
+						Layout.fillWidth: true
+						color: palette.text
+						font.pointSize: 11
+					}
+
+					Image {
+						id: indicator
+						Layout.rightMargin: 10
+
+						source: "../pix/images/icons/16/arrow-down.png"
+
+						states: State {
+							name: "up"
+							when: panel.expanded
+
+							PropertyChanges {
+								target: indicator
+								rotation: 180
+							}
+						}
+
+						transitions: [
+							Transition {
+								to: "up"
+
+								RotationAnimation {
+									duration: 250
+									direction: RotationAnimation.Clockwise
+									easing.type: Easing.InOutQuad
+								}
+							},
+							Transition {
+								from: "up"
+
+								RotationAnimation {
+									duration: 250
+									direction: RotationAnimation.Counterclockwise
+									easing.type: Easing.InOutQuad
+								}
+							}
+						]
+					}
 				}
 			}
 

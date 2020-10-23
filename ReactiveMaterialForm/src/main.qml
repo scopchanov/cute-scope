@@ -1,6 +1,5 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.12
 
 ApplicationWindow {
 	width: 480; height: 480
@@ -13,11 +12,11 @@ ApplicationWindow {
 	FontLoader { id: medium; source: "qrc:/bin/fonts/roboto/Roboto-Medium.ttf" }
 	FontLoader { id: bold; source: "qrc:/bin/fonts/roboto/Roboto-Bold.ttf" }
 
-	//	ExampleForm {
-	//		id: form
+//	ExampleForm {
+//		id: form
 
-	//		anchors.fill: parent
-	//	}
+//		anchors.fill: parent
+//	}
 
 	ExamplePanels {
 		width: 400

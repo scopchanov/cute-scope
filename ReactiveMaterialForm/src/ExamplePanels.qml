@@ -5,6 +5,8 @@ import "cdk"
 import "components"
 
 ColumnLayout {
+	id: root
+
 	Item {
 		Layout.fillHeight: true
 	}
@@ -25,8 +27,8 @@ ColumnLayout {
 
 			SExpansionPanel {
 				Layout.fillWidth: true
-
 				title: qsTr("Parents")
+				subtitle: qsTr("Our parents")
 
 				TextField {
 					Layout.fillWidth: true
@@ -52,6 +54,7 @@ ColumnLayout {
 			SExpansionPanel {
 				Layout.fillWidth: true
 				title: qsTr("Family")
+				subtitle: qsTr("Our parents")
 
 				TextField {
 					Layout.fillWidth: true
@@ -72,6 +75,7 @@ ColumnLayout {
 			SExpansionPanel {
 				Layout.fillWidth: true
 				title: qsTr("Siblings")
+				subtitle: qsTr("Our parents")
 
 				TextField {
 					Layout.fillWidth: true
