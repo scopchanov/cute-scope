@@ -16,6 +16,7 @@ FormElement {
 	property string errorMessage: qsTr("Error message")
 	property bool isRequired: false
 	property bool isTouched: false
+	property alias model: comboBox.model
 
 	implicitWidth: 280
 	implicitHeight: 72
@@ -63,12 +64,6 @@ FormElement {
 			leftPadding: 16
 			rightPadding: 48
 			displayText: isEmpty ? "" : currentText
-
-			model: [
-				{ value: null, text: "--" },
-				{ value: 0, text: qsTr("Make") },
-				{ value: 1, text: qsTr("Break") },
-			]
 		}
 
 		// Label

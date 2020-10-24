@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
+import QtGraphicalEffects 1.15
 import "../cdk"
 
 Item {
@@ -12,71 +13,93 @@ Item {
 
 	implicitHeight: base.height
 
-	Elevation { source: base; distance: 2 }
+	Elevation { source: container; distance: 2 }
 
-	Rectangle {
-		id: base
+	Item {
+		id: container
 
 		width: parent.width
-		height: mainLayout.implicitHeight
-		radius: 4
-		clip: true
+		height: base.height
 
-		ColumnLayout {
-			id: mainLayout
+		Rectangle {
+			id: base
 
 			width: parent.width
-			height: implicitHeight
-			spacing: 0
-
-			Item {
-				id: btnHeader
-
-				Layout.fillWidth: true
-				implicitHeight: 44
-
-				RowLayout {
-					anchors.fill: parent
-					spacing: 0
-
-					Label {
-						id: labelTitle
-
-						Layout.fillWidth: true
-						Layout.leftMargin: 20
-						color: palette.windowText
-						font.pointSize: 11
-						font.weight: Font.Medium
-					}
-
-					Label {
-						id: labelSubTitle
-
-						Layout.fillWidth: true
-						color: palette.text
-						font.pointSize: 11
-					}
-
-					ExpandedIndicator {
-						id: indicator
-
-						Layout.rightMargin: 15
-						expanded: panel.expanded
-						source: "../pix/images/icons/16/arrow-down.png"
-					}
-				}
-
-				MouseArea {
-					anchors.fill: parent
-					onClicked: panel.toggle()
-					cursorShape: Qt.PointingHandCursor
+			height: mainLayout.implicitHeight
+			layer.enabled: true
+			layer.effect: OpacityMask {
+				maskSource: Rectangle {
+					width: base.width
+					height: base.height
+					radius: 4
 				}
 			}
 
-			Collapsible {
-				id: panel
+			ColumnLayout {
+				id: mainLayout
 
-				Layout.fillWidth: true
+				width: parent.width
+				height: implicitHeight
+				spacing: 0
+
+				Rectangle {
+					id: btnHeader
+
+					Layout.fillWidth: true
+					implicitHeight: 64
+					color: mouseArea.hovered
+						   ? mouseArea.containsPress
+							 ? palette.midlight : palette.light : "transparent"
+
+					RowLayout {
+						anchors.fill: parent
+						spacing: 0
+
+						Label {
+							id: labelTitle
+
+							Layout.fillWidth: true
+							Layout.leftMargin: 20
+							color: palette.windowText
+							font.weight: Font.Medium
+						}
+
+						Label {
+							id: labelSubTitle
+
+							Layout.fillWidth: true
+							color: palette.text
+							font.pointSize: 11
+						}
+
+						ExpandedIndicator {
+							id: indicator
+
+							Layout.rightMargin: 15
+							expanded: panel.expanded
+							source: "../pix/images/icons/16/arrow-down.png"
+						}
+					}
+
+					MouseArea {
+						id: mouseArea
+
+						property bool hovered: false
+
+						anchors.fill: parent
+						onClicked: panel.toggle()
+						cursorShape: Qt.PointingHandCursor
+						hoverEnabled: true
+						onEntered: hovered = true
+						onExited: hovered = false
+					}
+				}
+
+				Collapsible {
+					id: panel
+
+					Layout.fillWidth: true
+				}
 			}
 		}
 	}

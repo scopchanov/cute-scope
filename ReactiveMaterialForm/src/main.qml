@@ -20,74 +20,136 @@ ApplicationWindow {
 	FontLoader { id: medium; source: "qrc:/bin/fonts/roboto/Roboto-Medium.ttf" }
 	FontLoader { id: bold; source: "qrc:/bin/fonts/roboto/Roboto-Bold.ttf" }
 
-	header: TabBar {
-		id: tabBar
+	SExpansionPanel {
+		id: expansionPanel
 
-		width: parent.width
+		anchors.left: parent.left
+		anchors.right: parent.right
+		anchors.verticalCenter: parent.verticalCenter
+		anchors.margins: 20
+		title: qsTr("New Input")
 
-		background: Rectangle {
-			color: "red"
-		}
-
-		TabButton {
-			text: qsTr("Form")
-			width: implicitWidth
-
-		}
-
-		TabButton {
-			text: "Second"
-			width: implicitWidth
-		}
-
-		TabButton {
-			text: "Third"
-			width: implicitWidth
-		}
-	}
-
-	SwipeView {
-		id: view
-
-		currentIndex: tabBar.currentIndex
-		anchors.fill: parent
-
-		Page {
-			ExampleForm {
+		ColumnLayout {
+			spacing: 15
+			Form {
 				id: form
 
-				anchors.fill: parent
-			}
-		}
+				Layout.fillWidth: true
+				implicitHeight: background.implicitHeight
 
-		Page {
-			ExamplePanels {
-				width: 400
-				height: parent.height
-				anchors.centerIn: parent
-			}
-		}
+				background: ColumnLayout {
+					width: parent.width
+					spacing: 15
+				}
 
-		Page {
-			ExampleSnack {
-				anchors.fill: parent
-			}
-		}
+				SLineEdit {
+					Layout.fillWidth: true
+					labelText: qsTr("Name")
+					helperText: qsTr("Helper text")
+				}
 
-		Page {
-			ExampleButtonGroup {
-				anchors.centerIn: parent
+				SComboBox {
+					Layout.fillWidth: true
+					labelText: qsTr("Type")
+					helperText: qsTr("Helper text")
+
+					model: [
+						{ value: null, text: "--" },
+						{ value: 0, text: qsTr("Make") },
+						{ value: 1, text: qsTr("Break") },
+					]
+				}
+
+				SLineEdit {
+					Layout.fillWidth: true
+					labelText: qsTr("Description")
+					helperText: qsTr("Helper text")
+				}
+			}
+
+			RowLayout {
+				Layout.margins: 10
+				spacing: 15
+
+				TextButton {
+					text: qsTr("Reset")
+				}
+
+				SPushButton {
+					text: qsTr("Create")
+				}
 			}
 		}
 	}
 
-	PageIndicator {
-		id: indicator
+//	header: TabBar {
+//		id: tabBar
 
-		count: view.count
-		currentIndex: view.currentIndex
+//		width: parent.width
 
-		anchors.bottom: view.bottom
-		anchors.horizontalCenter: parent.horizontalCenter
-	}
+//		background: Rectangle {
+//			color: "red"
+//		}
+
+//		TabButton {
+//			text: qsTr("Form")
+//			width: implicitWidth
+
+//		}
+
+//		TabButton {
+//			text: "Second"
+//			width: implicitWidth
+//		}
+
+//		TabButton {
+//			text: "Third"
+//			width: implicitWidth
+//		}
+//	}
+
+//	SwipeView {
+//		id: view
+
+//		currentIndex: tabBar.currentIndex
+//		anchors.fill: parent
+
+//		Page {
+//			ExampleForm {
+//				id: form
+
+//				anchors.fill: parent
+//			}
+//		}
+
+//		Page {
+//			ExamplePanels {
+//				width: 400
+//				height: parent.height
+//				anchors.centerIn: parent
+//			}
+//		}
+
+//		Page {
+//			ExampleSnack {
+//				anchors.fill: parent
+//			}
+//		}
+
+//		Page {
+//			ExampleButtonGroup {
+//				anchors.centerIn: parent
+//			}
+//		}
+//	}
+
+//	PageIndicator {
+//		id: indicator
+
+//		count: view.count
+//		currentIndex: view.currentIndex
+
+//		anchors.bottom: view.bottom
+//		anchors.horizontalCenter: parent.horizontalCenter
+//	}
 }

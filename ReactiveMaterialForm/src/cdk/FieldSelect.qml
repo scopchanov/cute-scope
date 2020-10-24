@@ -77,5 +77,5 @@ ComboBox {
 		}
 	}
 
-	onCurrentValueChanged: console.log(currentValue)
+//	onCurrentValueChanged: console.log(currentValue)
 }

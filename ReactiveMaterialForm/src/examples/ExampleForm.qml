@@ -20,6 +20,12 @@ SFormPanel {
 
 		Layout.fillWidth: true
 		objectName: "prop"
+
+		model: [
+			{ value: null, text: "--" },
+			{ value: 0, text: qsTr("Make") },
+			{ value: 1, text: qsTr("Break") },
+		]
 	}
 
 	SLineEdit {
@@ -85,7 +91,7 @@ SFormPanel {
 		labelText: qsTr("Text property with a default value")
 		helperText: qsTr("This field already contains a text")
 
-		Component.onCompleted: console.log(Form.form)
+//		Component.onCompleted: console.log(Form.form)
 	}
 
 	actions: [
@@ -93,7 +99,7 @@ SFormPanel {
 			Layout.fillHeight: true
 			text: qsTr("Reset")
 //			enabled: !form.pristine
-			onClicked: { console.log(property7.Form.form); form.reset() }
+//			onClicked: { console.log(property7.Form.form); form.reset() }
 		},
 		SPushButton {
 			text: qsTr("Submit")

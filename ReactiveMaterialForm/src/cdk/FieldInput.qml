@@ -13,9 +13,9 @@ TextField {
 	selectByMouse: true
 	background: Rectangle { color: "transparent" }
 
-	Keys.onEscapePressed: {
-		console.log("reject")
-	}
+//	Keys.onEscapePressed: {
+//		console.log("reject")
+//	}
 
 	onActiveFocusChanged: {
 		if (!activeFocus) {
@@ -29,7 +29,6 @@ TextField {
 	}
 
 	onEditingFinished: {
-		console.log("changed")
 		focus = false
 	}
 }

@@ -71,6 +71,10 @@ Item {
 				cursorShape: "PointingHandCursor"
 				hoverEnabled: true
 
+				onClicked: root.clicked()
+				onEntered: hovered = true
+				onExited: hovered = false
+
 				onReleased: {
 					if (containsMouse) {
 						ripple.x = mouse.x - 0.5*ripple.width
@@ -78,10 +82,6 @@ Item {
 						ripple.start(mouse.x, mouse.y)
 					}
 				}
-
-				onClicked: root.clicked()
-				onEntered: hovered = true
-				onExited: hovered = false
 			}
 		}
 	}
