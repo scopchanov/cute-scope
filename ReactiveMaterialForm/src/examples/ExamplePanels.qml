@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
+import Scope.ReactiveForms 1.0
 import "../cdk"
 import "../components"
 
@@ -29,27 +30,28 @@ ColumnLayout {
 
 			SExpansionPanel {
 				Layout.fillWidth: true
-				title: qsTr("Parents")
+				title: qsTr("Small form")
 				subtitle: qsTr("Our parents")
 
-				TextField {
-					Layout.fillWidth: true
-					text: "Didi"
-				}
+				Form {
+					id: form
 
-				TextField {
 					Layout.fillWidth: true
-					text: "Gena"
-				}
+					implicitHeight: background.implicitHeight
 
-				TextField {
-					Layout.fillWidth: true
-					text: "Sveta"
-				}
+					SLineEdit {
+						id: property2
 
-				TextField {
-					Layout.fillWidth: true
-					text: "Val"
+						Layout.fillWidth: true
+						objectName: "property2"
+						labelText: qsTr("Optional text property")
+						helperText: qsTr("Type \"enable\" to enable the next field")
+					}
+
+					background: ColumnLayout {
+						width: parent.width
+						spacing: 15
+					}
 				}
 			}
 

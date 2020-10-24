@@ -7,6 +7,8 @@ import QtQuick 2.15
 Item {
 	id: root
 
+	visible: enabled
+
 	property color color: "white"
 
 	function start() {

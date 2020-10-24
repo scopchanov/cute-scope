@@ -100,7 +100,7 @@ Item {
 		to: "disabled"
 		reversible: true
 
-		ColorAnimation { duration: 150; easing.type: Easing.InOutQuad }
+		ColorAnimation { duration: 150;/* easing.type: Easing.InOutQuad*/ }
 
 	}
 }

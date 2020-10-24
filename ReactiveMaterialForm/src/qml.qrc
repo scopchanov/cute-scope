@@ -27,5 +27,6 @@
         <file>examples/ExamplePanels.qml</file>
         <file>components/SSnackBar.qml</file>
         <file>examples/ExampleSnack.qml</file>
+        <file>examples/ExampleButtonGroup.qml</file>
     </qresource>
 </RCC>

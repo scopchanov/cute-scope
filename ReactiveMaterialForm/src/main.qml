@@ -20,19 +20,74 @@ ApplicationWindow {
 	FontLoader { id: medium; source: "qrc:/bin/fonts/roboto/Roboto-Medium.ttf" }
 	FontLoader { id: bold; source: "qrc:/bin/fonts/roboto/Roboto-Bold.ttf" }
 
-//	ExampleForm {
-//		id: form
+	header: TabBar {
+		id: tabBar
 
-//		anchors.fill: parent
-//	}
+		width: parent.width
 
-//	ExamplePanels {
-//		width: 400
-//		height: parent.height
-//		anchors.centerIn: parent
-//	}
+		background: Rectangle {
+			color: "red"
+		}
 
-	ExampleSnack {
+		TabButton {
+			text: qsTr("Form")
+			width: implicitWidth
+
+		}
+
+		TabButton {
+			text: "Second"
+			width: implicitWidth
+		}
+
+		TabButton {
+			text: "Third"
+			width: implicitWidth
+		}
+	}
+
+	SwipeView {
+		id: view
+
+		currentIndex: tabBar.currentIndex
 		anchors.fill: parent
+
+		Page {
+			ExampleForm {
+				id: form
+
+				anchors.fill: parent
+			}
+		}
+
+		Page {
+			ExamplePanels {
+				width: 400
+				height: parent.height
+				anchors.centerIn: parent
+			}
+		}
+
+		Page {
+			ExampleSnack {
+				anchors.fill: parent
+			}
+		}
+
+		Page {
+			ExampleButtonGroup {
+				anchors.centerIn: parent
+			}
+		}
+	}
+
+	PageIndicator {
+		id: indicator
+
+		count: view.count
+		currentIndex: view.currentIndex
+
+		anchors.bottom: view.bottom
+		anchors.horizontalCenter: parent.horizontalCenter
 	}
 }
