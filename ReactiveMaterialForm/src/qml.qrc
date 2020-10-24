@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>cdk/FieldActivationIndicator.qml</file>
+        <file>cdk/ActivationIndicator.qml</file>
         <file>cdk/FieldIcon.qml</file>
         <file>cdk/FieldInput.qml</file>
         <file>cdk/FieldLabel.qml</file>

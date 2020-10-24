@@ -43,13 +43,14 @@ FormElement {
 		}
 
 		// Activation indicator
-		FieldActivationIndicator {
+		ActivationIndicator {
 			id: activationIndicator
 
 			anchors.horizontalCenter: parent.horizontalCenter
 			anchors.bottom: parent.bottom
-			activated: comboBox.activeFocus
+			implicitWidth: parent.width
 			color: palette.highlight
+			activated: comboBox.activeFocus
 		}
 
 		// Select

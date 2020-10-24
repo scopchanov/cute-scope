@@ -14,50 +14,74 @@ Item {
 
 	signal clicked()
 
-	implicitWidth: label.implicitWidth + 32
+	implicitWidth: Math.max(label.implicitWidth + 32, 64)
 	implicitHeight: 36
 	activeFocusOnTab: true
+	scale: mouseArea.containsPress ? 0.97 : 1
+
+	Behavior on scale {
+		NumberAnimation {
+			duration: 25
+		}
+	}
 
 	Elevation {
-		source: base
-		distance: 2
+		source: container
+		distance: mouseArea.containsPress ? 3 : 4
 	}
 
-	Rectangle {
-		id: base
+	Item {
+		id: container
 
 		anchors.fill: parent
-		color: palette.button
-		radius: 4
-		clip: true
 
-		Ripple {
-			id: ripple
+		Rectangle {
+			id: base
 
-			width: root.width
-			enabled: mouseArea.pressed
+			color: mouseArea.hovered ? Qt.lighter(palette.button, 1.04) : palette.button
+			anchors.fill: parent
+			layer.enabled: true
+			layer.effect: OpacityMask {
+				maskSource: Rectangle {
+					width: base.width
+					height: base.height
+					radius: 4
+				}
+			}
+
+			Ripple {
+				id: ripple
+
+				width: base.width
+				enabled: mouseArea.pressed
+			}
+
+			ButtonLabel {
+				id: label
+
+				anchors.centerIn: parent
+				color: palette.buttonText
+			}
+
+			MouseArea {
+				id: mouseArea
+
+				property bool hovered: false
+
+				anchors.fill: parent
+				cursorShape: "PointingHandCursor"
+				hoverEnabled: true
+
+				onPressed: {
+					ripple.x = mouse.x - 0.5*ripple.width
+					ripple.y = mouse.y - 0.5*ripple.height
+				}
+
+				onClicked: root.clicked()
+				onEntered: hovered = true
+				onExited: hovered = false
+			}
 		}
-	}
-
-	ButtonLabel {
-		id: label
-
-		anchors.centerIn: parent
-		color: palette.buttonText
-	}
-
-	MouseArea {
-		id: mouseArea
-
-		anchors.fill: parent
-		cursorShape: "PointingHandCursor"
-
-		onPressed: {
-			ripple.x = mouse.x - 0.5*ripple.width
-			ripple.y = mouse.y - 0.5*ripple.height
-		}
-
-		onClicked: root.clicked()
 	}
 
 	states: [

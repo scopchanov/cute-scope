@@ -7,10 +7,9 @@ import QtQuick 2.15
 Rectangle {
 	id: root
 
-	height: width
+	implicitHeight: width
 	radius: 0.5*width
-	opacity: 0.25
-	transformOrigin: Item.Center
+	opacity: 0.1
 	visible: enabled || animation.running
 
 	onEnabledChanged: if (enabled) { animation.start() }

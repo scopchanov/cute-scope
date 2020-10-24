@@ -1,7 +1,7 @@
 import QtQuick 2.15
 
 /*
- * Field Activation Indicator
+ * Activation Indicator
  */
 
 Rectangle {
@@ -9,14 +9,17 @@ Rectangle {
 
 	property bool activated
 
-	width: 0; height: 2
-	implicitWidth: parent.width
+	width: 0
+	height: 2
 
 	states: State {
 		name: "activated"
 		when: activated
 
-		PropertyChanges { target: root; width: implicitWidth }
+		PropertyChanges {
+			target: root
+			width: implicitWidth
+		}
 	}
 
 	transitions: Transition {

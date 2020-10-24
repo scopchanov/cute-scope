@@ -52,13 +52,14 @@ FormElement {
 		}
 
 		// Activation indicator
-		FieldActivationIndicator {
+		ActivationIndicator {
 			id: activationIndicator
 
 			anchors.horizontalCenter: parent.horizontalCenter
 			anchors.bottom: parent.bottom
-			activated: fieldInput.activeFocus
+			implicitWidth: parent.width
 			color: palette.highlight
+			activated: fieldInput.activeFocus
 		}
 
 		// Input
