@@ -20,7 +20,10 @@ FormElement {
 		id: checkBox
 
 		checked: value
-		onCheckStateChanged: value = checked
+		onCheckStateChanged: {
+			ripple.start()
+			value = checked
+		}
 
 		indicator: Item {
 			implicitWidth: 40
@@ -77,7 +80,6 @@ FormElement {
 
 				anchors.centerIn: parent
 				width: box.width
-				enabled: checkBox.down
 				color: palette.button
 			}
 

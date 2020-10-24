@@ -53,7 +53,6 @@ Item {
 				id: ripple
 
 				width: base.width
-				enabled: mouseArea.pressed
 			}
 
 			ButtonLabel {
@@ -72,9 +71,12 @@ Item {
 				cursorShape: "PointingHandCursor"
 				hoverEnabled: true
 
-				onPressed: {
-					ripple.x = mouse.x - 0.5*ripple.width
-					ripple.y = mouse.y - 0.5*ripple.height
+				onReleased: {
+					if (containsMouse) {
+						ripple.x = mouse.x - 0.5*ripple.width
+						ripple.y = mouse.y - 0.5*ripple.height
+						ripple.start(mouse.x, mouse.y)
+					}
 				}
 
 				onClicked: root.clicked()

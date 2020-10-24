@@ -4,23 +4,61 @@ import QtQuick 2.15
  * Ripple
  */
 
-Rectangle {
+Item {
 	id: root
 
+	property color color: "white"
+
+	function start() {
+		rippleLoader.active = true
+	}
+
 	implicitHeight: width
-	radius: 0.5*width
-	opacity: 0.1
-	visible: enabled || animation.running
 
-	onEnabledChanged: if (enabled) { animation.start() }
+	Loader {
+		id: rippleLoader
 
-	NumberAnimation {
-		id: animation
+		anchors.fill: parent
+		active: false
 
-		target: root
-		property: "scale"
-		from: 1; to: 2
-		duration: 350
-		easing.type: Easing.InOutQuad
+		sourceComponent: Rectangle {
+			id: ripple
+
+			signal completed()
+
+			anchors.fill: parent
+			radius: 0.5*width
+			opacity: 0.25
+
+			NumberAnimation {
+				id: animation
+
+				target: ripple
+				property: "scale"
+				from: 0.5; to: 2
+				duration: 250
+				easing.type: Easing.InOutQuad
+
+				onFinished: ripple.completed()
+			}
+
+			Component.onCompleted: animation.start()
+		}
+	}
+
+	Binding {
+		target: rippleLoader.item
+		property: "color"
+		value: color
+	}
+
+	Connections {
+		target: rippleLoader.item
+
+		function onCompleted() {
+			rippleLoader.active = false
+		}
 	}
 }
+
+

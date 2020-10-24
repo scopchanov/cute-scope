@@ -28,7 +28,6 @@ Item {
 			id: ripple
 
 			width: root.width
-			enabled: mouseArea.pressed
 		}
 	}
 
@@ -48,6 +47,7 @@ Item {
 		onPressed: {
 			ripple.x = mouse.x - 0.5*ripple.width
 			ripple.y = mouse.y - 0.5*ripple.height
+			ripple.start()
 		}
 
 		onClicked: root.clicked()
