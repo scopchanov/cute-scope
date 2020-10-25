@@ -35,14 +35,17 @@ Item {
 
 	implicitHeight: container.height
 
+	// Drop shadow
 	Elevation { source: container; distance: 2 }
 
+	// Container
 	Item {
 		id: container
 
 		width: parent.width
 		height: base.height
 
+		// Base
 		Rectangle {
 			id: base
 
@@ -57,6 +60,7 @@ Item {
 				}
 			}
 
+			// Main layout
 			ColumnLayout {
 				id: mainLayout
 
@@ -64,11 +68,13 @@ Item {
 				height: implicitHeight
 				spacing: 0
 
+				// Header
 				ExpansionHeader {
 					id: expansionHeader
 					Layout.fillWidth: true
 				}
 
+				// Collapsible panel
 				Collapsible {
 					id: panel
 

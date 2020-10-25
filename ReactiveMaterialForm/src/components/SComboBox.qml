@@ -26,7 +26,7 @@ import Scope.ReactiveForms 1.0
 import "../cdk"
 
 /*
- * ComboBox
+ * Combo Box
  */
 
 FormElement {
@@ -55,6 +55,7 @@ FormElement {
 		radius: 4
 		color: comboBox.hovered ? palette.light : palette.base
 
+		// Bottom border
 		Rectangle {
 			id: bottomBorder
 
@@ -99,6 +100,7 @@ FormElement {
 			text: isRequired ? labelText + " *" : labelText
 		}
 
+		// Drop-down indicator
 		Image {
 			source: "/pix/images/icons/24/indicator-down.png"
 			anchors.verticalCenter: container.verticalCenter

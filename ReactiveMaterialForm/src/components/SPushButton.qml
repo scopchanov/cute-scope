@@ -44,16 +44,19 @@ AbstractButton {
 
 	Behavior on scale { ScaleAnimator { duration: 25 } }
 
+	// Drop shadow
 	Elevation {
 		source: container
 		distance: down ? 3 : 4
 	}
 
+	// Container
 	background: Item {
 		id: container
 
 		anchors.fill: parent
 
+		// Base
 		Rectangle {
 			id: base
 
@@ -70,8 +73,10 @@ AbstractButton {
 
 			Behavior on color { ColorAnimation { duration: 150 } }
 
+			// Ripple
 			Ripple { id: ripple; width: base.width }
 
+			// Cursor pointer
 			MouseArea {
 				anchors.fill: parent
 				cursorShape: "PointingHandCursor"
@@ -80,6 +85,7 @@ AbstractButton {
 		}
 	}
 
+	// Label
 	ButtonLabel {
 		id: label
 

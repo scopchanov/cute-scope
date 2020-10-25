@@ -22,6 +22,7 @@ SOFTWARE.
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtGraphicalEffects 1.15
 
 /*
  * Field Select
@@ -34,9 +35,23 @@ ComboBox {
 	valueRole: "value"
 
 	delegate: ItemDelegate {
+		id: delegate
+
 		width: root.width
+		highlighted: root.highlightedIndex === index
+		clip: true
+
+		background: Rectangle {
+			implicitHeight: 48
+			opacity: enabled ? 1 : 0.25
+			color: highlighted ? delegate.down ? palette.midlight
+											   : palette.light : "transparent"
+		}
 
 		contentItem: Label {
+			leftPadding: 20
+			rightPadding: 20
+			anchors.fill: parent
 			text: modelData.text
 			color: root.currentIndex === index ? palette.windowText : palette.text
 			font.weight: root.currentIndex === index ? Font.Medium : Font.Normal
@@ -44,7 +59,21 @@ ComboBox {
 			verticalAlignment: Text.AlignVCenter
 		}
 
-		highlighted: root.highlightedIndex === index
+		onClicked: {
+			ripple.x = pressX - 0.5*ripple.width
+			ripple.y = pressY - 0.5*ripple.height
+			ripple.start()
+		}
+
+		// Ripple
+		Ripple { id: ripple; width: root.width; color: palette.button }
+
+		// Cursor pointer
+		MouseArea {
+			anchors.fill: parent
+			cursorShape: "PointingHandCursor"
+			enabled: false
+		}
 	}
 
 	indicator: Item {
@@ -78,19 +107,52 @@ ComboBox {
 			currentIndex: root.highlightedIndex
 			clip: true
 
-			ScrollIndicator.vertical: ScrollIndicator {  }
+			ScrollIndicator.vertical: ScrollIndicator {}
+		}
+
+		enter: Transition {
+			NumberAnimation {
+				property: "opacity"
+				from: 0.0; to: 1.0
+				duration: 350
+				easing.type: Easing.InOutQuad
+			}
+		}
+
+		exit: Transition {
+			NumberAnimation {
+				property: "opacity"
+				from: 1.0; to: 0.0
+				duration: 350
+				easing.type: Easing.InOutQuad
+			}
 		}
 
 		background: Item {
 			Elevation {
-				source: asd
+				source: container
 				distance: 8
 			}
 
-			Rectangle {
-				id: asd
+			Item {
+				id: container
+
 				anchors.fill: parent
-				radius: 4
+
+				Rectangle {
+					id: base
+
+					anchors.fill: parent
+					color: palette.base
+					layer.enabled: true
+					layer.effect: OpacityMask {
+						maskSource: Rectangle {
+							width: base.width
+							height: base.height
+							radius: 4
+						}
+					}
+				}
 			}
 		}
 
@@ -99,5 +161,12 @@ ComboBox {
 		}
 	}
 
-//	onCurrentValueChanged: console.log(currentValue)
+	// Cursor pointer
+	MouseArea {
+		anchors.fill: parent
+		cursorShape: "PointingHandCursor"
+		enabled: false
+	}
+
+	//	onCurrentValueChanged: console.log(currentValue)
 }
