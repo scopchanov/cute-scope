@@ -43,12 +43,14 @@ ApplicationWindow {
 				}
 
 				SLineEdit {
+					objectName: "name"
 					Layout.fillWidth: true
 					labelText: qsTr("Name")
 					helperText: qsTr("Helper text")
 				}
 
 				SComboBox {
+					objectName: "type"
 					Layout.fillWidth: true
 					labelText: qsTr("Type")
 					helperText: qsTr("Helper text")
@@ -61,6 +63,7 @@ ApplicationWindow {
 				}
 
 				SLineEdit {
+					objectName: "description"
 					Layout.fillWidth: true
 					labelText: qsTr("Description")
 					helperText: qsTr("Helper text")
@@ -72,11 +75,19 @@ ApplicationWindow {
 				spacing: 15
 
 				TextButton {
+					id: btnReset
+
 					text: qsTr("Reset")
+
+					onClicked: btnSubmit.enabled = !btnSubmit.enabled
 				}
 
 				SPushButton {
+					id: btnSubmit
+
 					text: qsTr("Create")
+
+					onClicked: form.submit()
 				}
 			}
 		}

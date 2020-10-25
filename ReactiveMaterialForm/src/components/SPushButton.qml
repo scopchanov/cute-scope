@@ -7,30 +7,27 @@ import "../cdk"
  * Push Button
  */
 
-Item {
+AbstractButton {
 	id: root
-
-	property alias text: label.text
-
-	signal clicked()
 
 	implicitWidth: Math.max(label.implicitWidth + 32, 64)
 	implicitHeight: 36
-	activeFocusOnTab: true
-	scale: mouseArea.containsPress ? 0.97 : 1
+	scale: down ? 0.97 : 1
 
-	Behavior on scale {
-		NumberAnimation {
-			duration: 25
-		}
+	onClicked: {
+		ripple.x = pressX - 0.5*ripple.width
+		ripple.y = pressY - 0.5*ripple.height
+		ripple.start()
 	}
+
+	Behavior on scale { ScaleAnimator { duration: 25 } }
 
 	Elevation {
 		source: container
-		distance: mouseArea.containsPress ? 3 : 4
+		distance: down ? 3 : 4
 	}
 
-	Item {
+	background: Item {
 		id: container
 
 		anchors.fill: parent
@@ -38,8 +35,8 @@ Item {
 		Rectangle {
 			id: base
 
-			color: mouseArea.hovered ? Qt.lighter(palette.button, 1.04) : palette.button
 			anchors.fill: parent
+			color: palette.button
 			layer.enabled: true
 			layer.effect: OpacityMask {
 				maskSource: Rectangle {
@@ -49,41 +46,24 @@ Item {
 				}
 			}
 
-			Ripple {
-				id: ripple
+			Behavior on color { ColorAnimation { duration: 150 } }
 
-				width: base.width
-			}
-
-			ButtonLabel {
-				id: label
-
-				anchors.centerIn: parent
-				color: palette.buttonText
-			}
+			Ripple { id: ripple; width: base.width }
 
 			MouseArea {
-				id: mouseArea
-
-				property bool hovered: false
-
 				anchors.fill: parent
 				cursorShape: "PointingHandCursor"
-				hoverEnabled: true
-
-				onClicked: root.clicked()
-				onEntered: hovered = true
-				onExited: hovered = false
-
-				onReleased: {
-					if (containsMouse) {
-						ripple.x = mouse.x - 0.5*ripple.width
-						ripple.y = mouse.y - 0.5*ripple.height
-						ripple.start(mouse.x, mouse.y)
-					}
-				}
+				enabled: false
 			}
 		}
+	}
+
+	ButtonLabel {
+		id: label
+
+		anchors.centerIn: parent
+		color: palette.buttonText
+		text: root.text
 	}
 
 	states: [
@@ -91,16 +71,26 @@ Item {
 			name: "disabled"
 			when: !enabled
 
-			PropertyChanges { target: base; color: "#E0E0E0" }
-			PropertyChanges { target: label; color: "#9E9E9E" }
+			PropertyChanges { target: base; color: palette.window }
+			PropertyChanges { target: label; color: palette.mid }
+		},
+		State {
+			name: "focused"
+			when: activeFocus
+
+			PropertyChanges {
+				target: base
+				color: Qt.lighter(palette.button, 1.12)
+			}
+		},
+		State {
+			name: "hover"
+			when: hovered
+
+			PropertyChanges {
+				target: base
+				color: Qt.lighter(palette.button, 1.04)
+			}
 		}
 	]
-
-	transitions: Transition {
-		to: "disabled"
-		reversible: true
-
-		ColorAnimation { duration: 150;/* easing.type: Easing.InOutQuad*/ }
-
-	}
 }

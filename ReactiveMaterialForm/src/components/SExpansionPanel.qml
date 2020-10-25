@@ -46,7 +46,7 @@ Item {
 					id: btnHeader
 
 					Layout.fillWidth: true
-					implicitHeight: 64
+					implicitHeight: 48
 					color: mouseArea.hovered
 						   ? mouseArea.containsPress
 							 ? palette.midlight : palette.light : "transparent"
