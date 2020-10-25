@@ -1,105 +1,103 @@
+/**
+MIT License
+
+Copyright (c) 2020 Michael Scopchanov
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 import QtQuick 2.15
-import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 import Scope.ReactiveForms 1.0
-import "../cdk"
 import "../components"
 
-ColumnLayout {
+/*
+ * Example Panels
+ */
+
+SExpansionPanel {
 	id: root
 
-	Item {
-		Layout.fillHeight: true
-	}
+	title: qsTr("New Input")
 
-	Flickable {
-		id: flickable
+	ColumnLayout {
+		spacing: 15
 
-		Layout.fillWidth: true
-		Layout.fillHeight: true
-		contentWidth: columnLayout.width
-		contentHeight: columnLayout.height
-		flickableDirection: Flickable.VerticalFlick
-		ScrollBar.vertical: ScrollBar {}
+		Form {
+			id: form
 
-		ColumnLayout {
-			id: columnLayout
+			Layout.fillWidth: true
+			implicitHeight: background.implicitHeight
 
-			width: flickable.width
-			spacing: 8
-
-			SExpansionPanel {
-				Layout.fillWidth: true
-				title: qsTr("Small form")
-				subtitle: qsTr("Our parents")
-
-				Form {
-					id: form
-
-					Layout.fillWidth: true
-					implicitHeight: background.implicitHeight
-
-					SLineEdit {
-						id: property2
-
-						Layout.fillWidth: true
-						objectName: "property2"
-						labelText: qsTr("Optional text property")
-						helperText: qsTr("Type \"enable\" to enable the next field")
-					}
-
-					background: ColumnLayout {
-						width: parent.width
-						spacing: 15
-					}
-				}
+			background: ColumnLayout {
+				width: parent.width
+				spacing: 15
 			}
 
-			SExpansionPanel {
+			SLineEdit {
+				objectName: "name"
+				isRequired: true
 				Layout.fillWidth: true
-				title: qsTr("Family")
-				subtitle: qsTr("Our parents")
-
-				TextField {
-					Layout.fillWidth: true
-					text: "Misho"
-				}
-
-				TextField {
-					Layout.fillWidth: true
-					text: "Sisi"
-				}
-
-				TextField {
-					Layout.fillWidth: true
-					text: "Pise"
-				}
+				labelText: qsTr("Name")
+				helperText: qsTr("The input's name, e.g. \"1B1\"")
 			}
 
-			SExpansionPanel {
+			SComboBox {
+				objectName: "type"
 				Layout.fillWidth: true
-				title: qsTr("Siblings")
-				subtitle: qsTr("Our parents")
+				labelText: qsTr("Type")
+				helperText: qsTr("The input's type, e.g. \"Make\"")
 
-				TextField {
-					Layout.fillWidth: true
-					text: "Cveti"
-				}
+				model: [
+					{ value: null, text: "--" },
+					{ value: 0, text: qsTr("Make") },
+					{ value: 1, text: qsTr("Break") },
+				]
+			}
 
-				TextField {
-					Layout.fillWidth: true
-					text: "Vidi"
-				}
-
-				TextField {
-					Layout.fillWidth: true
-					text: "Ico"
-				}
+			SLineEdit {
+				objectName: "description"
+				Layout.fillWidth: true
+				labelText: qsTr("Description")
+				helperText: qsTr("The input's description, e.g. \"Separator is BACK\"")
 			}
 		}
-	}
 
-	Item {
-		Layout.fillHeight: true
+		RowLayout {
+			Layout.margins: 10
+			spacing: 15
+
+			SFlatButton {
+				id: btnReset
+
+				text: qsTr("Reset")
+				enabled: !form.pristine
+
+				onClicked: form.reset()
+			}
+
+			SPushButton {
+				id: btnSubmit
+
+				text: qsTr("Create")
+				enabled: form.valid
+
+				onClicked: form.submit()
+			}
+		}
 	}
 }

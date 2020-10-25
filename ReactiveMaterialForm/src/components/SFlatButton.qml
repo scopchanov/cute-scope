@@ -22,32 +22,38 @@ SOFTWARE.
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.15
 import "../cdk"
 
-Item {
+/*
+ * Flat Button
+ */
+
+AbstractButton {
 	id: root
 
-	default property alias content: panel.content
-	property alias title: expansionHeader.title
-	property alias subtitle: expansionHeader.subtitle
+	implicitWidth: label.implicitWidth + 16
+	implicitHeight: 36
+	scale: down ? 0.97 : 1
 
-	implicitHeight: container.height
+	onClicked: {
+		ripple.x = pressX - 0.5*ripple.width
+		ripple.y = pressY - 0.5*ripple.height
+		ripple.start()
+	}
 
-	Elevation { source: container; distance: 2 }
+	Behavior on scale { ScaleAnimator { duration: 25 } }
 
-	Item {
+	background: Item {
 		id: container
 
-		width: parent.width
-		height: base.height
+		anchors.fill: parent
 
 		Rectangle {
 			id: base
 
-			width: parent.width
-			height: mainLayout.implicitHeight
+			anchors.fill: parent
+			color: "transparent"
 			layer.enabled: true
 			layer.effect: OpacityMask {
 				maskSource: Rectangle {
@@ -57,24 +63,55 @@ Item {
 				}
 			}
 
-			ColumnLayout {
-				id: mainLayout
+//			Behavior on color { ColorAnimation { duration: 150 } }
 
-				width: parent.width
-				height: implicitHeight
-				spacing: 0
+			Ripple {
+				id: ripple
 
-				ExpansionHeader {
-					id: expansionHeader
-					Layout.fillWidth: true
-				}
+				width: root.width
+				color: Qt.lighter(palette.button, 1.7)
+			}
 
-				Collapsible {
-					id: panel
-
-					Layout.fillWidth: true
-				}
+			MouseArea {
+				anchors.fill: parent
+				cursorShape: "PointingHandCursor"
+				enabled: false
 			}
 		}
 	}
+
+	ButtonLabel {
+		id: label
+
+		anchors.centerIn: parent
+		color: palette.button
+		text: root.text
+	}
+
+	states: [
+		State {
+			name: "disabled"
+			when: !enabled
+
+			PropertyChanges { target: label; color: palette.mid }
+		},
+		State {
+			name: "focused"
+			when: activeFocus
+
+			PropertyChanges {
+				target: base
+				color: Qt.lighter(palette.button, 2.15)
+			}
+		},
+		State {
+			name: "hover"
+			when: hovered
+
+			PropertyChanges {
+				target: base
+				color: Qt.lighter(palette.button, 2.23)
+			}
+		}
+	]
 }

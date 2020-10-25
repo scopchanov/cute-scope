@@ -13,7 +13,7 @@
         <file>components/SComboBox.qml</file>
         <file>components/SLineEdit.qml</file>
         <file>components/SPushButton.qml</file>
-        <file>components/TextButton.qml</file>
+        <file>components/SFlatButton.qml</file>
         <file>components/SFormPanel.qml</file>
         <file>cdk/Elevation.qml</file>
         <file>cdk/Shadow.qml</file>
@@ -28,5 +28,6 @@
         <file>components/SSnackBar.qml</file>
         <file>examples/ExampleSnack.qml</file>
         <file>examples/ExampleButtonGroup.qml</file>
+        <file>cdk/ExpansionHeader.qml</file>
     </qresource>
 </RCC>

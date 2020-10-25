@@ -22,71 +22,59 @@ SOFTWARE.
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtGraphicalEffects 1.15
-import "../cdk"
-
-/*
- * Push Button
- */
+import QtQuick.Layouts 1.12
 
 AbstractButton {
 	id: root
 
-	implicitWidth: Math.max(label.implicitWidth + 32, 64)
-	implicitHeight: 36
-	scale: down ? 0.97 : 1
+	property alias title: labelTitle.text
+	property alias subtitle: labelSubTitle.text
 
-	onClicked: {
-		ripple.x = pressX - 0.5*ripple.width
-		ripple.y = pressY - 0.5*ripple.height
-		ripple.start()
-	}
+	implicitHeight: 48
 
-	Behavior on scale { ScaleAnimator { duration: 25 } }
+	background: Rectangle {
+		id: base
 
-	Elevation {
-		source: container
-		distance: down ? 3 : 4
-	}
+		color: "transparent"
 
-	background: Item {
-		id: container
-
-		anchors.fill: parent
-
-		Rectangle {
-			id: base
-
+		MouseArea {
 			anchors.fill: parent
-			color: palette.button
-			layer.enabled: true
-			layer.effect: OpacityMask {
-				maskSource: Rectangle {
-					width: base.width
-					height: base.height
-					radius: 4
-				}
-			}
-
-			Behavior on color { ColorAnimation { duration: 150 } }
-
-			Ripple { id: ripple; width: base.width }
-
-			MouseArea {
-				anchors.fill: parent
-				cursorShape: "PointingHandCursor"
-				enabled: false
-			}
+			cursorShape: Qt.PointingHandCursor
+			enabled: false
 		}
 	}
 
-	ButtonLabel {
-		id: label
+	RowLayout {
+		anchors.fill: parent
+		spacing: 0
 
-		anchors.centerIn: parent
-		color: palette.buttonText
-		text: root.text
+		Label {
+			id: labelTitle
+
+			Layout.fillWidth: true
+			Layout.leftMargin: 20
+			color: palette.windowText
+			font.weight: Font.Medium
+		}
+
+		Label {
+			id: labelSubTitle
+
+			Layout.fillWidth: true
+			color: palette.text
+			font.pointSize: 11
+		}
+
+		ExpandedIndicator {
+			id: indicator
+
+			Layout.rightMargin: 15
+			expanded: panel.expanded
+			source: "../pix/images/icons/16/arrow-down.png"
+		}
 	}
+
+	onClicked: panel.toggle()
 
 	states: [
 		State {
@@ -94,7 +82,17 @@ AbstractButton {
 			when: !enabled
 
 			PropertyChanges { target: base; color: palette.window }
-			PropertyChanges { target: label; color: palette.mid }
+			PropertyChanges { target: labelTitle; color: palette.mid }
+			PropertyChanges { target: labelSubTitle; color: palette.mid }
+		},
+		State {
+			name: "pressed"
+			when: down
+
+			PropertyChanges {
+				target: base
+				color: Qt.darker(palette.midlight, 1.1)
+			}
 		},
 		State {
 			name: "focused"
@@ -102,7 +100,7 @@ AbstractButton {
 
 			PropertyChanges {
 				target: base
-				color: Qt.lighter(palette.button, 1.23)
+				color: palette.midlight
 			}
 		},
 		State {
@@ -111,7 +109,7 @@ AbstractButton {
 
 			PropertyChanges {
 				target: base
-				color: Qt.lighter(palette.button, 1.09)
+				color: palette.light
 			}
 		}
 	]
