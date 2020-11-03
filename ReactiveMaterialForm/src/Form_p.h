@@ -24,7 +24,7 @@ SOFTWARE.
 #define FORM_P_H
 
 #include <QtCore>
-#include <QQmlListProperty>
+//#include <QQmlListProperty>
 
 class QQuickItem;
 class Form;

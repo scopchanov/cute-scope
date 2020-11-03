@@ -24,6 +24,8 @@ SOFTWARE.
 #include <QQmlApplicationEngine>
 #include "Form.h"
 #include "FormElement.h"
+#include "AbstractValidator.h"
+#include "ValidatorRequired.h"
 
 int main(int argc, char *argv[])
 {
@@ -36,6 +38,8 @@ int main(int argc, char *argv[])
 
 	qmlRegisterType<Form>("Scope.ReactiveForms", 1, 0, "Form");
 	qmlRegisterType<FormElement>("Scope.ReactiveForms", 1, 0, "FormElement");
+	qmlRegisterUncreatableType<AbstractValidator>("Scope.Validators", 1, 0, "AbstractValidator", "Base class for all validators");
+	qmlRegisterType<ValidatorRequired>("Scope.Validators", 1, 0, "ValidatorRequired");
 
 	QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
 					 &app, [url](QObject *obj, const QUrl &objUrl) {

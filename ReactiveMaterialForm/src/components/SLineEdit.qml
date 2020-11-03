@@ -43,8 +43,7 @@ FormElement {
 	implicitWidth: 280
 	implicitHeight: 72
 	opacity: enabled ? 1 : 0.25
-
-	valid: !isRequired || !isEmpty
+//	valid: !isRequired || !isEmpty
 
 	Behavior on opacity {
 		NumberAnimation {
@@ -118,7 +117,7 @@ FormElement {
 			iconSource: "/pix/images/icons/24/clear-outline.png"
 
 			onClicked: {
-				fieldInput.clear()
+				root.clear()
 
 				if (state !== "focused")
 					focus = true

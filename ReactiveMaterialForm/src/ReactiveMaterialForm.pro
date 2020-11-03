@@ -23,15 +23,19 @@ QT += gui widgets quick
 CONFIG += c++11 qtquickcompiler
 
 SOURCES += \
+    AbstractValidator.cpp \
+    ValidatorRequired.cpp \
     main.cpp \
     Form.cpp \
     FormElement.cpp
 
 HEADERS += \
+    AbstractValidator.h \
     Form.h \
     Form_p.h \
     FormElement.h \
-    FormElement_p.h
+    FormElement_p.h \
+    ValidatorRequired.h
 
 RESOURCES += \
     qml.qrc \

@@ -23,17 +23,8 @@ SOFTWARE.
 #include "Form.h"
 #include "Form_p.h"
 #include "FormElement.h"
-//#include <QQmlProperty>
 #include <QJsonValue>
-//#include <QQmlEngine>
-//#include <QQmlContext>
-//#include <QQuickWindow>
 #include <QDebug>
-
-//auto *anchors = qvariant_cast<QObject *>(item->property("anchors"));
-//anchors->setProperty("left", property("left"));
-//anchors->setProperty("right", property("right"));
-//anchors->setProperty("topMargin", m_ptr->spacing);
 
 Form::Form(QQuickItem *parent) :
 	QQuickItem(parent),
@@ -183,7 +174,7 @@ void Form::submit()
 void Form::appendElement(QQmlListProperty<FormElement> *list,
 						 FormElement *formElement)
 {
-	reinterpret_cast<Form* >(list->data)->appendElement(formElement);
+	reinterpret_cast<Form *>(list->data)->appendElement(formElement);
 }
 
 int Form::elementCount(QQmlListProperty<FormElement> *list)
@@ -211,67 +202,6 @@ void Form::removeLastElement(QQmlListProperty<FormElement> *list)
 {
 	reinterpret_cast<Form *>(list->data)->removeLastElement();
 }
-
-//void Form::itemChange(ItemChange change,
-//					  const ItemChangeData &value)
-//{
-//	switch (change) {
-//	case ItemSceneChange:
-//		if (value.window) {
-//			auto *engine = qmlEngine(this);
-//			QQmlComponent compLayout(engine, this);
-
-//			compLayout.setData(QString("import QtQuick 2.15;"
-//									   "import QtQuick.Layouts 1.12;"
-//									   "ColumnLayout {"
-//									   "	anchors.fill: parent;"
-//									   "	spacing: %1;"
-//									   "}").arg(m_ptr->spacing).toLatin1(),
-//							   QUrl("formLayout"));
-
-//			m_ptr->formLayout = qobject_cast<QQuickItem *>(compLayout.create());
-
-//			engine->setObjectOwnership(m_ptr->formLayout,
-//									   QQmlEngine::JavaScriptOwnership);
-
-//			if (m_ptr->formLayout)
-//				m_ptr->formLayout->setParentItem(this);
-
-//			for (auto item : childItems())
-//				if (item->inherits("FormElement"))
-//					item->setParentItem(m_ptr->formLayout);
-
-//			connect(m_ptr->formLayout, &QQuickItem::implicitWidthChanged,
-//					this, &Form::onImplicitWidthChanged);
-//			connect(m_ptr->formLayout, &QQuickItem::implicitHeightChanged,
-//					this, &Form::onImplicitHeightChanged);
-//		}
-//		break;
-//	case ItemChildAddedChange: {
-//		auto *item = value.item;
-
-//		if (item->inherits("FormElement")) {
-//			auto *formElement = qobject_cast<FormElement *>(item);
-
-//			connect(formElement, &FormElement::valueChanged,
-//					this, &Form::valueChanged);
-//			connect(formElement, &FormElement::pristineChanged,
-//					this, &Form::checkPristine);
-//			connect(formElement, &FormElement::validChanged,
-//					this, &Form::checkValid);
-//		}
-
-//		break;
-//	}
-//	case ItemChildRemovedChange:
-////		qDebug() << "removed" << value.item;
-//		break;
-//	default:
-//		break;
-//	}
-
-//	QQuickItem::itemChange(change, value);
-//}
 
 void Form::checkPristine()
 {

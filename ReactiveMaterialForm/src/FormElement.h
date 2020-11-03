@@ -27,25 +27,30 @@ SOFTWARE.
 #include <QJsonValue>
 
 class FormElementPrivate;
+class AbstractValidator;
 
 class FormElement : public QQuickItem
 {
 	Q_OBJECT
-	Q_PROPERTY(bool valid READ valid WRITE setValid NOTIFY validChanged)
+	Q_PROPERTY(bool valid READ valid NOTIFY validChanged)
 	Q_PROPERTY(bool pristine READ pristine NOTIFY pristineChanged)
 	Q_PROPERTY(bool touched READ touched WRITE setTouched NOTIFY touchedChanged)
 	Q_PROPERTY(QJsonValue value READ value WRITE setValue NOTIFY valueChanged)
+	Q_PROPERTY(QQmlListProperty<AbstractValidator> validators READ validators)
 	QML_ELEMENT
 public:
 	explicit FormElement(QQuickItem *parent = nullptr);
 
 	bool valid() const;
-	void setValid(bool b);
 	bool pristine() const;
 	bool touched() const;
 	void setTouched(bool b);
 	QJsonValue value() const;
 	void setValue(const QJsonValue &val);
+
+	QQmlListProperty<AbstractValidator> validators();
+
+	void componentComplete() override;
 
 public slots:
 	void init(const QJsonValue &val);
@@ -63,7 +68,6 @@ private:
 
 signals:
 	void validChanged();
-	void invalidChanged();
 	void pristineChanged();
 	void touchedChanged();
 	void valueChanged();

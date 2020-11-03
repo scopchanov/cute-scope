@@ -65,7 +65,6 @@ signals:
 	void formChanged();
 };
 
-//class Form;
 class FormPrivate;
 class FormElement;
 
@@ -113,7 +112,7 @@ private:
 	static void appendElement(QQmlListProperty<FormElement> *list,
 							  FormElement *formElement);
 	static int elementCount(QQmlListProperty<FormElement> *list);
-	static FormElement* element(QQmlListProperty<FormElement> *list, int n);
+	static FormElement *element(QQmlListProperty<FormElement> *list, int n);
 	static void clearElements(QQmlListProperty<FormElement> *list);
 	static void replaceElement(QQmlListProperty<FormElement> *list, int n,
 							 FormElement *formElement);

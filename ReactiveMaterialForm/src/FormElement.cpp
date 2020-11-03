@@ -22,29 +22,19 @@ SOFTWARE.
 
 #include "FormElement.h"
 #include "FormElement_p.h"
+#include "AbstractValidator.h"
 #include <QDebug>
 
 FormElement::FormElement(QQuickItem *parent) :
 	QQuickItem(parent),
 	m_ptr(new FormElementPrivate(this))
 {
-//	setActiveFocusOnTab(true);
-//	scopedFocusItem();
+
 }
 
 bool FormElement::valid() const
 {
 	return m_ptr->valid;
-}
-
-void FormElement::setValid(bool b)
-{
-	if (m_ptr->valid == b)
-		return;
-
-	m_ptr->valid = b;
-
-	emit validChanged();
 }
 
 bool FormElement::pristine() const
@@ -82,6 +72,20 @@ void FormElement::setValue(const QJsonValue &val)
 	m_ptr->value = val;
 
 	emit valueChanged();
+
+	m_ptr->setValid(m_ptr->checkValid());
+}
+
+QQmlListProperty<AbstractValidator> FormElement::validators()
+{
+	return { this, &m_ptr->validators };
+}
+
+void FormElement::componentComplete()
+{
+	QQuickItem::componentComplete();
+
+	m_ptr->valid = m_ptr->checkValid();
 }
 
 void FormElement::init(const QJsonValue &val)
@@ -139,4 +143,24 @@ void FormElementPrivate::setPristine(bool b)
 	pristine = b;
 
 	emit p_ptr->pristineChanged();
+}
+
+void FormElementPrivate::setValid(bool b)
+{
+	if (valid == b)
+		return;
+
+	valid = b;
+
+	emit p_ptr->validChanged();
+}
+
+bool FormElementPrivate::checkValid()
+{
+	bool isValid = true;
+
+	for (auto *validator : validators)
+		isValid &= validator->valid(value);
+
+	return isValid;
 }

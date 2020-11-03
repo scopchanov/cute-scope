@@ -24,8 +24,10 @@ SOFTWARE.
 #define FORMELEMENT_P_H
 
 #include <QtCore>
+#include <QQmlListProperty>
 
 class FormElement;
+class AbstractValidator;
 
 class FormElementPrivate {
 
@@ -34,6 +36,8 @@ class FormElementPrivate {
 	explicit FormElementPrivate(FormElement *parent);
 
 	void setPristine(bool b);
+	void setValid(bool b);
+	bool checkValid();
 
 	FormElement *p_ptr;
 
@@ -42,6 +46,7 @@ class FormElementPrivate {
 	bool touched;
 	QJsonValue value;
 	QJsonValue defaultValue;
+	QList<AbstractValidator *> validators;
 
 	friend class FormElement;
 };

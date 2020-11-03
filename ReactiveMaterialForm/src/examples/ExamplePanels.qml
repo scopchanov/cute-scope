@@ -23,6 +23,7 @@ SOFTWARE.
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
 import Scope.ReactiveForms 1.0
+import Scope.Validators 1.0
 import "../components"
 
 /*
@@ -54,6 +55,9 @@ SExpansionPanel {
 				Layout.fillWidth: true
 				labelText: qsTr("Name")
 				helperText: qsTr("The input's name, e.g. \"1B1\"")
+				validators: [
+					ValidatorRequired {}
+				]
 			}
 
 			SComboBox {

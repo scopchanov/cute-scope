@@ -44,8 +44,6 @@ FormElement {
 	implicitHeight: 72
 	opacity: enabled ? 1 : 0.25
 
-	valid: true
-
 	// Container
 	Rectangle {
 		id: container
@@ -87,6 +85,8 @@ FormElement {
 			leftPadding: 16
 			rightPadding: 48
 			displayText: isEmpty ? "" : currentText
+
+			onCurrentIndexChanged: root.value = currentText
 		}
 
 		// Label
