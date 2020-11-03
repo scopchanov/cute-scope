@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>StateItem.qml</file>
+        <file>GraphicsView.qml</file>
+        <file>SelectionRectangle.qml</file>
+        <file>SimpleItem.qml</file>
+        <file>SimpleView.qml</file>
+        <file>AppToolBar.qml</file>
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+    <qresource prefix="/bin">
+        <file>fonts/roboto/Roboto-Bold.ttf</file>
+        <file>fonts/roboto/Roboto-Medium.ttf</file>
+        <file>fonts/roboto/Roboto-Regular.ttf</file>
+    </qresource>
+</RCC>
