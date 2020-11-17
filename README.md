@@ -18,15 +18,15 @@ To use the examples you need the [Qt Library](https://www.qt.io/) and a C++ comp
 My personal setup is a Windows 10 PC with a Microsoft Visual Studio 2019.
 
 ## Disclamer
-The code in this repository is **not** an official release by the Qt company or any other organisation. It is written solely by me, Michael Scopchanov, in my spare time and is based on my personal programming experience and understanding of how the Qt library is intended to be used. Despite my effort to keep my knowledge of Qt at a very high level by:
- 
- * Reading the official Qt documentation and examples
- * Watching tutorials availble on Youtube
- * Participating in online events like webinars, Qt related talks, etc.
- * Reading books about generic C++ programming and design patterns
- * Actively participating in Stack Overflow by asking and answering Qt related questions
- * Updating to the latest versions of Qt shortly after their release
- * Digging in the Qt's source code
- * Working on several Qt based projects of mine for desktop applications
- 
-there is absolutely no guarantee, that the code shared in this repository represents the best, or the only way, to solve a particular programming problem. Please do not use the code blindly, as it is meant only for demonstration purposes, but analyze how it works and, when necessary, adapt it to make it fit the requirements and standrads of your particullar application.
+The code in this repository is **not** an official release by the Qt company or any other organization. It is written solely by me, Michael Scopchanov, in my spare time, based on my personal programming experience, as well as on my understanding of the intended way of using the Qt library. Despite my effort to keep my knowledge of Qt at a very high level by:
+
+- reading the official Qt documentation and examples,
+- watching tutorials available on Youtube,
+- participating in online events like webinars, Qt related talks, etc.
+- reading books about generic C++ programming, clean code and design patterns,
+- actively participating in Stack Overflow by asking and answering Qt related questions,
+- updating to the latest versions of Qt shortly after their release,
+- digging into the Qt's source code,
+- working on several Qt-based projects of mine for desktop applications and open-source libraries,
+
+I cannot guarantee that the code shared in this repository represents the best or the only way to solve a particular programming problem. Please do not use the code blindly, as it is meant only for demonstration purposes. Instead, analyze how it works and, when necessary, adapt it to make it fit the requirements and standards of your particular application.
